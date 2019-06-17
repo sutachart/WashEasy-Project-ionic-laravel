@@ -39,16 +39,19 @@
   <!-- Address -->
   <form>
     <ion-card>
-      <ion-card-header>
-        <ion-label>
-          <h2 style="color: black;">จัดส่ง</h2>
-        </ion-label>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-label>
-          <p style="font-size: 14px;">หอแมวเหมียว ห้อง 1 ตำบล มข อำเภอ มข จังหวัด ขอนแก่น</p>
-        </ion-label>
-      </ion-card-content>
+      <ion-item lines="none" ionic-button (click)="presentModal()" detail>
+        <ion-card-header>
+          <ion-label>
+            <h2 style="color: black;">จัดส่ง</h2>
+          </ion-label>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label>
+            <span style="font-size: 14px;" *ngIf="dataReturned">{{dataReturned}}</span>
+            <span style="font-size: 14px;" *ngIf="!dataReturned">โปรดเลือก</span>
+          </ion-label>
+        </ion-card-content>
+      </ion-item>
     </ion-card>
   </form>
 

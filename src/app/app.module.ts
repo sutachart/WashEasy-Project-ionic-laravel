@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
+import { LocationListPageModule } from './user/location-list/location-list.module';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -21,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    LocationListPageModule
   ],
   providers: [
     StatusBar,
