@@ -27,4 +27,8 @@ export class LocationListPage implements OnInit {
     console.log(onClosedData);
   }
 
+  log(){
+    console.log("click more.");
+  }
+
 }
