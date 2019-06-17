@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 
+import { PopoverController } from '@ionic/angular';
+import { MoreLocationListComponent } from '../../more-location-list/more-location-list.component';
+
 @Component({
   selector: 'app-location-list',
   templateUrl: './location-list.page.html',
@@ -13,7 +16,8 @@ export class LocationListPage implements OnInit {
 
   constructor(
      private modalController: ModalController,
-    private navParams: NavParams) { }
+    private navParams: NavParams,
+    private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
     console.table(this.navParams);
@@ -26,6 +30,16 @@ export class LocationListPage implements OnInit {
     await this.modalController.dismiss(onClosedData);
     console.log(onClosedData);
   }
+
+  async notifications(ev: any) {
+    const popover = await this.popoverCtrl.create({
+        component: MoreLocationListComponent,
+        event: ev,
+        animated: true,
+        showBackdrop: true
+    });
+    return await popover.present();
+}
 
   log(){
     console.log("click more.");

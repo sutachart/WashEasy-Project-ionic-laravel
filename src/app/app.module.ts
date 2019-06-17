@@ -15,9 +15,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { LocationListPageModule } from './user/location-list/location-list.module';
 
+import { MoreLocationListComponent } from './more-location-list/more-location-list.component';
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, MoreLocationListComponent],
+  entryComponents: [MoreLocationListComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
