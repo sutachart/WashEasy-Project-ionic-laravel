@@ -1,3 +1,4 @@
+import { LocationListPage } from './../location-list/location-list.page';
 import { Component } from '@angular/core';
 import { ModalController, NavController, NavParams } from '@ionic/angular';
 // import { ModalPagePage } from '../modal-page/modal-page.page';
@@ -13,7 +14,6 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./callwash.page.scss'],
 })
 export class CallwashPage {
-
   dataReturned: any;
   datetime: string; // keep Date & Time
   i: any; // for Loop
@@ -34,23 +34,25 @@ export class CallwashPage {
 
   }
 
-  // async presentModal() {
-  //   const modal = await this.modalController.create({
-  //     component: ModalPagePage,
-  //     componentProps: {
-  //     }
-  //   });
-  // await modal.present();
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: LocationListPage,
+      componentProps: {
+        "paramID": 123,
+        "paramTitle": "Test Title"
+      }
+    });
+  await modal.present();
 
   // ---------------------
-  //   modal.onDidDismiss().then((dataReturned) => {
-  //     if (dataReturned !== null) {
-  //       this.dataReturned = dataReturned.data;
-  //       //alert('Modal Sent Data :'+ dataReturned);
-  //     }
-  //   });
-  //   return await modal.present();
-  // }
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+    return await modal.present();
+  }
 
   booleanChange() {
 
