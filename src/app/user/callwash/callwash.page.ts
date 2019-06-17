@@ -40,10 +40,9 @@ export class CallwashPage {
       componentProps: {
         "paramID": 123,
         "paramTitle": "Test Title"
-      }
+      },
+      cssClass: 'my-custom-modal-css'
     });
-  await modal.present();
-
   // ---------------------
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {

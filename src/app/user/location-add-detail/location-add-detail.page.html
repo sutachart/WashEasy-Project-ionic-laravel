@@ -5,5 +5,37 @@
 </ion-header>
 
 <ion-content>
-
+    <ion-item>
+        <ion-label position="fixed">ชื่อสถานที่ :</ion-label>
+        <!-- <ion-input [(ngModel)]="newItem.location_name" placeholder='บ้าน,ที่ทำงาน'></ion-input> -->
+        <ion-input placeholder='บ้าน,ที่ทำงาน'></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="fixed">ที่อยู่ :</ion-label>
+        <!-- <ion-textarea clearOnEdit="true" [(ngModel)]="newItem.address" placeholder='อาคาร ชั้นที่ ห้องที่'></ion-textarea> -->
+        <ion-textarea clearOnEdit="true" placeholder='อาคาร ชั้นที่ ห้องที่'></ion-textarea>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="fixed">เบอร์โทร :</ion-label>
+        <!-- <ion-input [(ngModel)]="newItem.tel" placeholder='09xxxxxxxx'></ion-input> -->
+        <ion-input placeholder='09xxxxxxxx'></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="fixed">รายละเอียด :</ion-label>
+        <!-- <ion-textarea clearOnEdit="true" [(ngModel)]="newItem.location_detail"
+          placeholder='บอกสถานที่ หรืออาคาร เพื่อให้เราหาคุณเจอ'></ion-textarea> -->
+          <ion-textarea clearOnEdit="true"
+          placeholder='บอกสถานที่ หรืออาคาร เพื่อให้เราหาคุณเจอ'></ion-textarea>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="fixed">ชื่อผู้รับ :</ion-label>
+        <!-- <ion-input [(ngModel)]="newItem.receiver_name" placeholder='น้องฮิปโป'></ion-input> -->
+        <ion-input placeholder='น้องฮิปโป'></ion-input>
+      </ion-item>
 </ion-content>
+
+
