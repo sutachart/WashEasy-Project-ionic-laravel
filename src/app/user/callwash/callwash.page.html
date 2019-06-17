@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Call Washeasy
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Services -->
+  <form>
+    <ion-card>
+      <ion-card-header style="margin-bottom: 0px; padding-bottom: 0px;">
+        <ion-label>
+          <h2 style="color: black;">เลือกบริการ</h2>
+        </ion-label>
+      </ion-card-header>
+      <ion-list style="margin-top: 0px; padding-top: 0px; margin-left: 5px;">
+        <ion-item lines="none">
+          <ion-checkbox [(ngModel)]="washService" (ionChange)="booleanChange()" name="washService"
+            style="margin-bottom: 8px; margin-top: 10px;"></ion-checkbox>
+          <ion-label style="margin-left: 8px;"> ซัก</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox [(ngModel)]="steamService" (ionChange)="booleanChange()" name="washService"
+            style="margin-bottom: 10px; margin-top: 10px;"></ion-checkbox>
+          <ion-label style="margin-left: 8px;">อบ</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+
+  </form>
+
+  <!-- Address -->
+  <form>
+    <ion-card>
+      <ion-card-header>
+        <ion-label>
+          <h2 style="color: black;">จัดส่ง</h2>
+        </ion-label>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label>
+          <p style="font-size: 14px;">หอแมวเหมียว ห้อง 1 ตำบล มข อำเภอ มข จังหวัด ขอนแก่น</p>
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+  </form>
+
+
+  <!-- Price -->
+  <form>
+    <ion-card>
+      <ion-item lines="none">
+        <ion-note slot="start">
+          <p style="font-size: 16px; color: black;">ราคา</p>
+        </ion-note>
+        <ion-label>
+          <p style="text-align: center; color: rgb(7, 114, 255);">{{price}}</p>
+        </ion-label>
+        <ion-note slot="end">
+          <p style="font-size: 16px; color: black;">บาท</p>
+        </ion-note>
+      </ion-item>
+    </ion-card>
+  </form>
+
+
+</ion-content>
+<!-- /Content -->
+
+
+<!-- Footer  -->
+<ion-footer>
+  <ion-toolbar class="ion-text-center">
+    <ion-button (click)="presentAlert()">ยืนยัน</ion-button>
+  </ion-toolbar>
+</ion-footer>
+<!-- /Footer -->

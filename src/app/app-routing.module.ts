@@ -15,7 +15,9 @@ const routes: Routes = [
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
   },
-  { path: 'callwash', loadChildren: './callwash/callwash.module#CallwashPageModule' }
+  { 
+    path: 'callwash', 
+    loadChildren: './user/callwash/callwash.module#CallwashPageModule' }
 ];
 
 @NgModule({
