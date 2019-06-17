@@ -29,6 +29,11 @@ export class AppComponent {
       title: 'Home-washman',
       url: '/washman/home',
       icon: 'people'
+    },
+    {
+      title: 'Login',
+      url: '/login',
+      icon: 'people'
     }
   ];
 
