@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+
+  public orders = [
+    { id: '11' , name: 'testorder1'},
+    { id: '12' , name: 'testorder2'}
+  ]
   constructor() { }
 
 
