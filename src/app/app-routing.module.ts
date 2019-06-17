@@ -17,7 +17,11 @@ const routes: Routes = [
   },
   { 
     path: 'callwash', 
-    loadChildren: './user/callwash/callwash.module#CallwashPageModule' }
+    loadChildren: './user/callwash/callwash.module#CallwashPageModule' },
+  { path: 'location-list', loadChildren: './user/location-list/location-list.module#LocationListPageModule' },
+  { path: 'location-add-detail', loadChildren: './user/location-add-detail/location-add-detail.module#LocationAddDetailPageModule' },
+  { path: 'gps-map', loadChildren: './user/gps-map/gps-map.module#GpsMapPageModule' },
+  { path: 'edit-location', loadChildren: './user/edit-location/edit-location.module#EditLocationPageModule' }
 ];
 
 @NgModule({
