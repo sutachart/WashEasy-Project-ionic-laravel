@@ -24,6 +24,11 @@ export class AppComponent {
       title: 'callwash',
       url: '/callwash',
       icon: 'bicycle'
+    },
+    {
+      title: 'Home-washman',
+      url: '/washman/home',
+      icon: 'people'
     }
   ];
 
