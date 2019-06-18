@@ -4,6 +4,8 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { MoreLocationListComponent } from '../../more-location-list/more-location-list.component';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-location-list',
   templateUrl: './location-list.page.html',
@@ -11,13 +13,14 @@ import { MoreLocationListComponent } from '../../more-location-list/more-locatio
 })
 export class LocationListPage implements OnInit {
 
-  modalTitle:string;
-  modelId:number;
+  modalTitle: string;
+  modelId: number;
 
   constructor(
-     private modalController: ModalController,
+    private modalController: ModalController,
     private navParams: NavParams,
-    private popoverCtrl: PopoverController) { }
+    private popoverCtrl: PopoverController,
+    private router: Router) { }
 
   ngOnInit() {
     console.table(this.navParams);
@@ -33,16 +36,21 @@ export class LocationListPage implements OnInit {
 
   async notifications(ev: any) {
     const popover = await this.popoverCtrl.create({
-        component: MoreLocationListComponent,
-        event: ev,
-        animated: true,
-        showBackdrop: true
+      component: MoreLocationListComponent,
+      event: ev,
+      animated: true,
+      showBackdrop: true
     });
     return await popover.present();
-}
+  }
 
-  log(){
+  log() {
     console.log("click more.");
+  }
+
+  addLocation(){
+    this.router.navigateByUrl("/gps-map");
+    this.modalController.dismiss();
   }
 
 }

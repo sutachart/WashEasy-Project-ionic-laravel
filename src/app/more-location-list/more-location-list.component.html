@@ -1,11 +1,10 @@
 <ion-list no-padding no-margin>
-  <ion-item color="primary" class="text-10" (click)="messages()">
-    <ion-icon name="mail" color="light"></ion-icon>
+  <ion-item lines="none" color="light" class="text-10" (click)="edit()">
+    <ion-icon name="create" color="primary"></ion-icon>
     <ion-label>แก้ไข</ion-label>
   </ion-item>
-
-  <ion-item color="light" class="text-10" (click)="messages()">
-    <ion-icon name="mail-open" color="primary"></ion-icon>
+  <ion-item lines="none" color="light" class="text-10" (click)="presentAlertMultipleButtons()">
+    <ion-icon name="trash" color="danger"></ion-icon>
     <ion-label>ลบ</ion-label>
   </ion-item>
 </ion-list>

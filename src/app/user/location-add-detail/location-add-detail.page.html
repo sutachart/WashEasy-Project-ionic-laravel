@@ -1,41 +1,72 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>locationAddDetail</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      เพิ่มสถานที่
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-card-header style="padding-bottom: 1px">
+    <ion-row>
+      <ion-card-subtitle>สถานที่จัดส่ง</ion-card-subtitle>
+      <ion-segment (ionChange)="segmentChanged($event)" color="secondary">
+        <ion-segment-button value="standard">
+          <ion-label>บ้าน</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="hybrid">
+          <ion-label>ที่ทำงาน</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="sat">
+          <ion-label>สถานที่อื่น</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
+  </ion-card-header>
+  <ion-card-content style="padding-top: 1px">
     <ion-item>
-        <ion-label position="fixed">ชื่อสถานที่ :</ion-label>
-        <!-- <ion-input [(ngModel)]="newItem.location_name" placeholder='บ้าน,ที่ทำงาน'></ion-input> -->
-        <ion-input placeholder='บ้าน,ที่ทำงาน'></ion-input>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label position="fixed">ที่อยู่ :</ion-label>
-        <!-- <ion-textarea clearOnEdit="true" [(ngModel)]="newItem.address" placeholder='อาคาร ชั้นที่ ห้องที่'></ion-textarea> -->
-        <ion-textarea clearOnEdit="true" placeholder='อาคาร ชั้นที่ ห้องที่'></ion-textarea>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label position="fixed">เบอร์โทร :</ion-label>
-        <!-- <ion-input [(ngModel)]="newItem.tel" placeholder='09xxxxxxxx'></ion-input> -->
-        <ion-input placeholder='09xxxxxxxx'></ion-input>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label position="fixed">รายละเอียด :</ion-label>
-        <!-- <ion-textarea clearOnEdit="true" [(ngModel)]="newItem.location_detail"
-          placeholder='บอกสถานที่ หรืออาคาร เพื่อให้เราหาคุณเจอ'></ion-textarea> -->
-          <ion-textarea clearOnEdit="true"
-          placeholder='บอกสถานที่ หรืออาคาร เพื่อให้เราหาคุณเจอ'></ion-textarea>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label position="fixed">ชื่อผู้รับ :</ion-label>
-        <!-- <ion-input [(ngModel)]="newItem.receiver_name" placeholder='น้องฮิปโป'></ion-input> -->
-        <ion-input placeholder='น้องฮิปโป'></ion-input>
-      </ion-item>
+      <ion-label class="input-text" position="floating" required>ชื่ออาคาร/คอนโด :</ion-label>
+      <!-- <ion-input [(ngModel)]="newItem.location_name" placeholder='บ้าน,ที่ทำงาน'></ion-input> -->
+      <ion-input class="input-text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="input-text" position="floating" required>ถนน/ซอย :</ion-label>
+      <!-- <ion-textarea clearOnEdit="true" [(ngModel)]="newItem.address" placeholder='อาคาร ชั้นที่ ห้องที่'></ion-textarea> -->
+      <ion-input class="input-text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="input-text" position="floating">ชั้น/ห้อง :</ion-label>
+      <!-- <ion-input [(ngModel)]="newItem.tel" placeholder='09xxxxxxxx'></ion-input> -->
+      <ion-input class="input-text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="input-text" position="floating" required>รายละเอียด :</ion-label>
+      <!-- <ion-textarea clearOnEdit="true" [(ngModel)]="newItem.location_detail"
+                      placeholder='บอกสถานที่ หรืออาคาร เพื่อให้เราหาคุณเจอ'></ion-textarea> -->
+      <ion-textarea class="input-text" clearOnEdit="true"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="input-text" position="floating" required>เบอร์โทร :</ion-label>
+      <!-- <ion-input [(ngModel)]="newItem.receiver_name" placeholder='น้องฮิปโป'></ion-input> -->
+      <ion-input class="input-text"></ion-input>
+    </ion-item>
+  </ion-card-content>
 </ion-content>
 
-
+<!-- Footer  -->
+<ion-footer>
+  <ion-row>
+    <ion-toolbar class="ion-text-center">
+      <ion-button color="medium" (click)="presentAlert()">ยกเลิก</ion-button>
+      <ion-button (click)="presentAlert()">ยืนยัน</ion-button>
+    </ion-toolbar>
+  </ion-row>
+</ion-footer>
+<!-- /Footer -->
