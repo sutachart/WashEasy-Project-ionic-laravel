@@ -16,4 +16,7 @@ export class LocationAddDetailPage implements OnInit {
     console.log('Segment changed', ev);
   }
 
+  cancel(){}
+  confirm(){}
+
 }
