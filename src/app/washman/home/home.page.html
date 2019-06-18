@@ -9,17 +9,17 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header class="ion-text-center">
+    <ion-card-header class="ion-text-center" style="color: black;">
       ORDER รอรับ
     </ion-card-header>
   </ion-card>
   <ion-card>
     <ion-card-content>
-      <ion-item>
-        test
-      </ion-item>
       <ion-item *ngFor="let order of orders">
-        <ion-label>{{order.id}}</ion-label>
+        <ion-row>
+          <ion-label>{{order.name}}</ion-label>
+          <ion-button class="ion-text-right">รับ</ion-button>
+        </ion-row>
       </ion-item>
     </ion-card-content>
   </ion-card>
