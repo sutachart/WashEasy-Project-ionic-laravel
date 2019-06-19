@@ -21,7 +21,6 @@ export class DeveloperPage implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       let devId = params.get('id');
- 
       this.db.getDeveloper(devId).then(data => {
         this.developer = data;
       });
@@ -35,10 +34,8 @@ export class DeveloperPage implements OnInit {
   }
  
   updateDeveloper() {
-    let skills = this.skills.split(',');
-    skills = skills.map(skill => skill.trim());
-    // this.developer.skills = skills;
- 
+    // let skills = this.skills.split(',');
+    // skills = skills.map(skill => skill.trim());
     this.db.updateDeveloper(this.developer).then(async (res) => {
       let toast = await this.toast.create({
         message: 'Developer updated',

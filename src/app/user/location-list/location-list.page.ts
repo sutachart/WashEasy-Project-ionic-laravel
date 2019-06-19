@@ -22,6 +22,8 @@ export class LocationListPage implements OnInit {
   developer = {};
   product = {};
 
+  s : any;
+
   selectedView = 'devs';
   // input data from modal
   // modalTitle: string;
@@ -48,10 +50,16 @@ export class LocationListPage implements OnInit {
     });
   }
 
-  async closeModal(id : number) {
-    const onClosedData: any = this.db.getDeveloper(id);
+  async closeModal(aId) {
+    const id = aId-1;
+    const onClosedData: string = 
+    this.s = this.developers[id].locationName+", "
+    +this.developers[id].roadName+", "
+    +this.developers[id].floor_room+", "
+    +this.developers[id].tel+", "
+    +this.developers[id].locationDetail+", "
+    +this.developers[id].gpsValue;
     await this.modalController.dismiss(onClosedData);
-    console.log(onClosedData);
   }
 
   async notifications(ev: any) {
