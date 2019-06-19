@@ -41,7 +41,7 @@ export class LocationAddDetailPage implements OnInit {
   }
 
   addDeveloper() {
-    this.db.addDeveloper(this.developer['locationName'], this.developer['roadName'], this.developer['floor_name'], this.developer['tel'], this.developer['locationDetail'], this.developer['gpsValue'])
+    this.db.addDeveloper(this.developer['locationName'], this.developer['roadName'], this.developer['floor_room'], this.developer['tel'], this.developer['locationDetail'], this.developer['gpsValue'])
       .then(_ => {
         this.developer = {};
         this.router.navigateByUrl("/callwash");
