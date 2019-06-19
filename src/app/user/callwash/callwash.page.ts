@@ -101,7 +101,7 @@ export class CallwashPage {
           handler: () => {
 
             console.log("Confirm!");
-            let url: string = "http://localhost/ionicApp/insert_service.php";
+            let url: string = "http://localhost:8000/api/insertCallwash";
             let dataJson = new FormData();
             dataJson.append('serv_price', this.price); // total Price
             dataJson.append('serv_choice', this.select); // total Choice

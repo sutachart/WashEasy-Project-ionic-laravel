@@ -21,10 +21,11 @@ export class LoginPage {
     console.log("user :", this.user.username);
     console.log("pass :", this.user.password);
 
-    let url: string = "http://localhost/ionicApp/login.php";
+    //let url: string = "http://localhost/ionicApp/login.php";
+    let url: string = "http://localhost:8000/api/insertDB";
     let dataJson = new FormData();
-    dataJson.append('user',this.user.username);
-    dataJson.append('pass',this.user.password);
+    dataJson.append('username',this.user.username);
+    dataJson.append('password',this.user.password);
 
 
     let data:Observable<any> = this.http.post(url, dataJson)
@@ -34,5 +35,4 @@ export class LoginPage {
           console.log(res);
       });   
   }
-
 }
