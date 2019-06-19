@@ -29,35 +29,35 @@
   <ion-card-content style="padding-top: 1px">
     <ion-item>
       <ion-label class="input-text" position="floating" required>ชื่ออาคาร/คอนโด :</ion-label>
-      <!-- <ion-input [(ngModel)]="newItem.location_name" placeholder='บ้าน,ที่ทำงาน'></ion-input> -->
-      <ion-input class="input-text"></ion-input>
+      <ion-input class="input-text" [(ngModel)]="developer.locationName"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label class="input-text" position="floating" required>ถนน/ซอย :</ion-label>
-      <!-- <ion-textarea clearOnEdit="true" [(ngModel)]="newItem.address" placeholder='อาคาร ชั้นที่ ห้องที่'></ion-textarea> -->
-      <ion-input class="input-text"></ion-input>
+      <ion-input class="input-text" [(ngModel)]="developer.roadName"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label class="input-text" position="floating">ชั้น/ห้อง :</ion-label>
-      <!-- <ion-input [(ngModel)]="newItem.tel" placeholder='09xxxxxxxx'></ion-input> -->
-      <ion-input class="input-text"></ion-input>
+      <ion-input class="input-text" [(ngModel)]="developer.floor_room"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label class="input-text" position="floating" required>รายละเอียด :</ion-label>
-      <!-- <ion-textarea clearOnEdit="true" [(ngModel)]="newItem.location_detail"
-                      placeholder='บอกสถานที่ หรืออาคาร เพื่อให้เราหาคุณเจอ'></ion-textarea> -->
-      <ion-textarea class="input-text" clearOnEdit="true"></ion-textarea>
+      <ion-textarea class="input-text" clearOnEdit="true" [(ngModel)]="developer.tel"></ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-label class="input-text" position="floating" required>เบอร์โทร :</ion-label>
-      <!-- <ion-input [(ngModel)]="newItem.receiver_name" placeholder='น้องฮิปโป'></ion-input> -->
-      <ion-input class="input-text"></ion-input>
+      <ion-input class="input-text" [(ngModel)]="developer.locationDetail"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="input-text" position="floating" required>เบอร์โทร :</ion-label>
+      <ion-input class="input-text" [(ngModel)]="developer.gpsValue"></ion-input>
     </ion-item>
   </ion-card-content>
+
 </ion-content>
 
 <!-- Footer  -->
@@ -65,7 +65,7 @@
   <ion-row>
     <ion-toolbar class="ion-text-center">
       <ion-button color="medium" (click)="cancel()">ยกเลิก</ion-button>
-      <ion-button (click)="confirm()">ยืนยัน</ion-button>
+      <ion-button (click)="addDeveloper()">ยืนยัน</ion-button>
     </ion-toolbar>
   </ion-row>
 </ion-footer>

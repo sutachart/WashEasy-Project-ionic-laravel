@@ -10,6 +10,7 @@
       <ion-button color="secondary" fill="clear" [routerLink]="['/', 'developers', dev.id]">
         <ion-label class="locationListText">{{ dev.locationName }}</ion-label>
       </ion-button>
+      <ion-button (click)="closeModal(dev.id)">เลือก</ion-button>
       <ion-icon fill="clear" slot="icon-only" name="more" slot="end" (click)="notifications()"></ion-icon>
     </ion-item>
 
@@ -34,80 +35,6 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-  <!-- <ion-segment [(ngModel)]="selectedView">
-    <ion-segment-button value="devs">
-      <ion-label>Developer</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="products">
-      <ion-label>Products</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-
-  <div [ngSwitch]="selectedView">
-    <div *ngSwitchCase="'devs'">
-      <ion-item>
-        <ion-label position="stacked">What\'s your name?</ion-label>
-        <ion-input [(ngModel)]="developer.locationName" placeholder="locationName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">What are your special skills (comma separated)?</ion-label>
-        <ion-input [(ngModel)]="developer.roadName" placeholder="roadName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Your image URL</ion-label>
-        <ion-input [(ngModel)]="developer.floor_room" placeholder="floor_room"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Your image URL</ion-label>
-        <ion-input [(ngModel)]="developer.tel" placeholder="tel"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Your image URL</ion-label>
-        <ion-input [(ngModel)]="developer.locationDetail" placeholder="locationDetail"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Your image URL</ion-label>
-        <ion-input [(ngModel)]="developer.gpsValue" placeholder="gpsValue"></ion-input>
-      </ion-item>
-      <ion-button expand="block" (click)="addDeveloper()">Add Developer Info</ion-button>
-
-      <ion-list>
-        <ion-item button *ngFor="let dev of developers" [routerLink]="['/', 'developers', dev.id]">
-          <ion-avatar slot="start">
-            <img [src]="dev.floor_room">
-          </ion-avatar>
-          <ion-label>
-            <h2>{{ dev.locationName }}</h2>
-            <p>{{ dev.roadName }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
-
-    <div *ngSwitchCase="'products'">
-      <ion-item>
-        <ion-label position="stacked">Product name</ion-label>
-        <ion-input [(ngModel)]="product.name" placeholder="Name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Creator?</ion-label>
-        <ion-select [(ngModel)]="product.creator">
-          <ion-select-option *ngFor="let dev of developers" [value]="dev.id">{{ dev.locationName }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-button expand="block" (click)="addProduct()">Add Product</ion-button>
-
-      <ion-list>
-        <ion-item *ngFor="let prod of products | async">
-          <ion-label>
-            <h2>{{ prod.name }}</h2>
-            <p>Created by: {{ prod.creator }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
-  </div> -->
 </ion-content>
 
 <!-- Footer  -->

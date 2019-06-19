@@ -38,8 +38,8 @@ export class CallwashPage {
     const modal = await this.modalController.create({
       component: LocationListPage,
       componentProps: {
-        "paramID": 123,
-        "paramTitle": "Test Title"
+        // "paramID": 123,
+        // "paramTitle": "Test Title"
       },
       cssClass: 'my-custom-modal-css'
     });

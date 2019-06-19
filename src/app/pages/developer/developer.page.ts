@@ -24,7 +24,6 @@ export class DeveloperPage implements OnInit {
  
       this.db.getDeveloper(devId).then(data => {
         this.developer = data;
-        // this.skills = this.developer.skills.join(',');
       });
     });
   }
