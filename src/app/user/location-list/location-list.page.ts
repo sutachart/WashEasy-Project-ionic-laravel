@@ -23,9 +23,9 @@ export class LocationListPage implements OnInit {
   product = {};
 
   selectedView = 'devs';
-
-  modalTitle: string;
-  modelId: number;
+  // input data from modal
+  // modalTitle: string;
+  // modelId: number;
 
   constructor(
     private modalController: ModalController,
@@ -36,8 +36,8 @@ export class LocationListPage implements OnInit {
 
   ngOnInit() {
     console.table(this.navParams);
-    this.modelId = this.navParams.data.paramID;
-    this.modalTitle = this.navParams.data.paramTitle;
+    // this.modelId = this.navParams.data.paramID;
+    // this.modalTitle = this.navParams.data.paramTitle;
     this.db.getDatabaseState().subscribe(rdy => {
       if (rdy) {
         this.db.getDevs().subscribe(devs => {
@@ -48,8 +48,8 @@ export class LocationListPage implements OnInit {
     });
   }
 
-  async closeModal() {
-    const onClosedData: string = "บ้านแมวเหมียว";
+  async closeModal(id : number) {
+    const onClosedData: any = this.db.getDeveloper(id);
     await this.modalController.dismiss(onClosedData);
     console.log(onClosedData);
   }
@@ -62,10 +62,6 @@ export class LocationListPage implements OnInit {
       showBackdrop: true
     });
     return await popover.present();
-  }
-
-  log() {
-    console.log("click more.");
   }
 
   addLocation() {
