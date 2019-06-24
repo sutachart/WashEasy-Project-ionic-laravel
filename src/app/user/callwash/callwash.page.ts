@@ -1,12 +1,13 @@
 import { LocationListPage } from './../location-list/location-list.page';
 import { Component } from '@angular/core';
 import { ModalController, NavController, NavParams } from '@ionic/angular';
-// import { ModalPagePage } from '../modal-page/modal-page.page';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+
+import { DatabaseService, Dev } from './../../services/database.service';
 
 @Component({
   selector: 'app-callwash',
@@ -14,6 +15,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./callwash.page.scss'],
 })
 export class CallwashPage {
+  developer: Dev = null;
   dataReturned: any;
   datetime: string; // keep Date & Time
   i: any; // for Loop
@@ -30,7 +32,10 @@ export class CallwashPage {
     private router: Router,
     public navHttp: Http,
     public http: HttpClient,
-    private alertController: AlertController) {
+    private alertController: AlertController,
+    private db: DatabaseService) { }
+
+  ngOnInit() {
 
   }
 
@@ -43,10 +48,14 @@ export class CallwashPage {
       },
       cssClass: 'my-custom-modal-css'
     });
-  // ---------------------
+    // ---------------------
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {
-        this.dataReturned = dataReturned.data;
+        this.db.getDeveloper(dataReturned).then(data => {
+          this.developer = data;
+          console.log(this.developer.locationName);
+        });
+        //this.dataReturned = dataReturned.data;
         //alert('Modal Sent Data :'+ dataReturned);
       }
     });

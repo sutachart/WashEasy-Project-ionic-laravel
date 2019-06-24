@@ -75,10 +75,6 @@ export class DatabaseService {
 
       if (data.rows.length > 0) {
         for (var i = 0; i < data.rows.length; i++) {
-          // let skills = [];
-          // if (data.rows.item(i).skills != '') {
-          //   skills = JSON.parse(data.rows.item(i).skills);
-          // }
           developers.push({
             id: data.rows.item(i).id,
             locationName: data.rows.item(i).locationName,
@@ -103,11 +99,6 @@ export class DatabaseService {
 
   getDeveloper(id): Promise<Dev> {
     return this.database.executeSql('SELECT * FROM developer WHERE id = ?', [id]).then(data => {
-      // let skills = [];
-      // if (data.rows.item(0).skills != '') {
-      //   skills = JSON.parse(data.rows.item(0).skills);
-      // }
-
       return {
         id: data.rows.item(0).id,
         locationName: data.rows.item(0).locationName,
@@ -121,9 +112,9 @@ export class DatabaseService {
   }
 
   deleteDeveloper(id) {
-    return this.database.executeSql('DELETE FROM developer WHERE id = ?', [id]).then(_ => {
+    return this.database.executeSql('DELETE FROM developer WHERE id = ?', [id])
+    .then(_ => {
       this.loadDevelopers();
-      this.loadProducts();
     });
   }
 

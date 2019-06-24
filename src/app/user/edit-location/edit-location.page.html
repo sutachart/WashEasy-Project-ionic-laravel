@@ -1,9 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>editLocation</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="developers"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Developer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="delete()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <div *ngIf="developer">
+    <ion-item>
+      <ion-label position="stacked">ชื่ออาคาร/คอนโด :</ion-label>
+      <ion-input [(ngModel)]="developer.locationName" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">ถนน/ซอย :</ion-label>
+      <ion-input [(ngModel)]="developer.roadName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">ชั้น/ห้อง :</ion-label>
+      <ion-input [(ngModel)]="developer.floor_room"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">รายละเอียด :</ion-label>
+      <ion-input [(ngModel)]="developer.tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">เบอร์โทร :</ion-label>
+      <ion-input [(ngModel)]="developer.locationDetail"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">gps :</ion-label>
+      <ion-input [(ngModel)]="developer.gpsValue"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="updateDeveloper()">Update Location Info</ion-button>
+  </div>
 </ion-content>

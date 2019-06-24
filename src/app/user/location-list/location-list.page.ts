@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 import { PopoverController } from '@ionic/angular';
 import { MoreLocationListComponent } from '../../more-location-list/more-location-list.component';
@@ -22,19 +23,17 @@ export class LocationListPage implements OnInit {
   developer = {};
   product = {};
 
-  s : any;
-
   selectedView = 'devs';
   // input data from modal
   // modalTitle: string;
   // modelId: number;
-
   constructor(
     private modalController: ModalController,
     private navParams: NavParams,
     private popoverCtrl: PopoverController,
     private router: Router,
-    private db: DatabaseService) { }
+    private db: DatabaseService,
+    public alertController: AlertController) { }
 
   ngOnInit() {
     console.table(this.navParams);
@@ -50,45 +49,35 @@ export class LocationListPage implements OnInit {
     });
   }
 
-  async closeModal(aId) {
-    const id = aId-1;
-    const onClosedData: string = 
-    this.s = this.developers[id].locationName+", "
-    +this.developers[id].roadName+", "
-    +this.developers[id].floor_room+", "
-    +this.developers[id].tel+", "
-    +this.developers[id].locationDetail+", "
-    +this.developers[id].gpsValue;
-    await this.modalController.dismiss(onClosedData);
+  async choose(aId) {
+    // const del = this.db.getDeveloper(aId);
+    // console.log(del[0].id);
+    // const id = aId-1;
+    // const onClosedData: string =
+    //   this.developers[id].locationName + ", "
+    //   + this.developers[id].roadName + ", "
+    //   + this.developers[id].floor_room + ", "
+    //   + this.developers[id].tel + ", "
+    //   + this.developers[id].locationDetail + ", "
+    //   + this.developers[id].gpsValue;
+    console.log(aId);
+    await this.modalController.dismiss(aId);
+    // await this.modalController.dismiss(del[0].id);
   }
 
-  async notifications(ev: any) {
-    const popover = await this.popoverCtrl.create({
-      component: MoreLocationListComponent,
-      event: ev,
-      animated: true,
-      showBackdrop: true
-    });
-    return await popover.present();
-  }
+  // async notifications(ev: any) {
+  //   const popover = await this.popoverCtrl.create({
+  //     component: MoreLocationListComponent,
+  //     event: ev,
+  //     animated: true,
+  //     showBackdrop: true
+  //   });
+  //   return await popover.present();
+  // }
 
-  addLocation() {
+  addLoc() {
     this.router.navigateByUrl("/gps-map");
     this.modalController.dismiss();
-  }
-
-  addDeveloper() {
-    this.db.addDeveloper(this.developer['locationName'], this.developer['roadName'], this.developer['floor_name'], this.developer['tel'], this.developer['locationDetail'], this.developer['gpsValue'])
-      .then(_ => {
-        this.developer = {};
-      });
-  }
-
-  addProduct() {
-    this.db.addProduct(this.product['name'], this.product['creator'])
-      .then(_ => {
-        this.product = {};
-      });
   }
 
 }

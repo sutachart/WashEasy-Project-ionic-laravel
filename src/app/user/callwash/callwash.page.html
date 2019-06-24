@@ -48,12 +48,21 @@
         <ion-card-content>
           <ion-label>
             <span style="font-size: 14px;" *ngIf="!dataReturned">โปรดเลือก</span>
-            <span style="font-size: 14px;" *ngIf="dataReturned">{{dataReturned}}</span>
+            <div *ngIf="developer">
+              <span style="font-size: 14px;" [(ngModel)]="developer.locationName">{{dataReturned}}</span>
+            </div>
           </ion-label>
         </ion-card-content>
       </ion-item>
     </ion-card>
   </form>
+
+  <div *ngIf="developer">
+    <ion-item>
+      <ion-label position="stacked">What\'s your name?</ion-label>
+      <ion-input [(ngModel)]="developer.locationName" placeholder="locationName"></ion-input>
+    </ion-item>
+  </div>
 
 
   <!-- Price -->

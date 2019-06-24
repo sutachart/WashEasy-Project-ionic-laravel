@@ -10,7 +10,6 @@ import { ToastController } from '@ionic/angular';
 })
 export class DeveloperPage implements OnInit {
   developer: Dev = null;
-  skills = '';
 
   constructor(
     private route: ActivatedRoute, 

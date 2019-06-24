@@ -29,7 +29,7 @@ const routes: Routes = [
     path: 'gps-map', loadChildren: './user/gps-map/gps-map.module#GpsMapPageModule'
   },
   {
-    path: 'edit-location', loadChildren: './user/edit-location/edit-location.module#EditLocationPageModule'
+    path: 'location-list/:id', loadChildren: './user/edit-location/edit-location.module#EditLocationPageModule'
   },
   {
     path: 'washman/home', loadChildren: './washman/home/home.module#HomePageModule'
