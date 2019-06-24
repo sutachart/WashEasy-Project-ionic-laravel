@@ -9,9 +9,12 @@
       </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <div #mapElement class="map"></div>
 </ion-content>
 
-<ion-footer style="height: 15%;" class="footer_background_color">
-  <ion-button expand="block" (click)="addDetail()">Add detail</ion-button>
+<ion-footer>
+  <ion-toolbar class="ion-text-center">
+    <ion-button color="primary">ยืนยันตำแหน่ง</ion-button>
+  </ion-toolbar>
 </ion-footer>
