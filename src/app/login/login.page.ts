@@ -22,7 +22,7 @@ export class LoginPage {
     console.log("pass :", this.user.password);
 
     //let url: string = "http://localhost/ionicApp/login.php";
-    let url: string = "http://localhost:8000/api/insertDB";
+    let url: string = "http://localhost:8000/api/loginUser";
     let dataJson = new FormData();
     dataJson.append('username',this.user.username);
     dataJson.append('password',this.user.password);
