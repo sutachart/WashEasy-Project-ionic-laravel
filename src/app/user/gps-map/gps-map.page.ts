@@ -8,7 +8,7 @@ declare var google;
   templateUrl: './gps-map.page.html',
   styleUrls: ['./gps-map.page.scss'],
 })
-export class GpsMapPage  {
+export class GpsMapPage  implements AfterViewInit {
 
   MyLocation: any;
   latitude: any;
@@ -49,6 +49,10 @@ export class GpsMapPage  {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+  }
+
+  addDetails(){
+    this.router.navigateByUrl("/location-add-detail")
   }
 
 

@@ -6,7 +6,6 @@ import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-
 import { DatabaseService, Dev } from './../../services/database.service';
 
 @Component({
@@ -15,7 +14,17 @@ import { DatabaseService, Dev } from './../../services/database.service';
   styleUrls: ['./callwash.page.scss'],
 })
 export class CallwashPage {
-  developer: Dev = null;
+  //SQLite
+  developers: Dev[] = [];
+ 
+  products: Observable<any[]>;
+ 
+  developer = {};
+  product = {};
+ 
+  selectedView = 'devs';
+  // -SQLite
+
   dataReturned: any;
   datetime: string; // keep Date & Time
   i: any; // for Loop
@@ -28,7 +37,8 @@ export class CallwashPage {
   washService: boolean = false;
   steamService: boolean = false;
 
-  constructor(public modalController: ModalController,
+  constructor(
+    public modalController: ModalController,
     private router: Router,
     public navHttp: Http,
     public http: HttpClient,
@@ -36,7 +46,14 @@ export class CallwashPage {
     private db: DatabaseService) { }
 
   ngOnInit() {
-
+    this.db.getDatabaseState().subscribe(rdy => {
+      if (rdy) {
+        this.db.getDevs().subscribe(devs => {
+          this.developers = devs;
+        })
+        this.products = this.db.getProducts();
+      }
+    });
   }
 
   async presentModal() {
@@ -51,11 +68,7 @@ export class CallwashPage {
     // ---------------------
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {
-        this.db.getDeveloper(dataReturned).then(data => {
-          this.developer = data;
-          console.log(this.developer.locationName);
-        });
-        //this.dataReturned = dataReturned.data;
+        this.dataReturned = dataReturned.data;
         //alert('Modal Sent Data :'+ dataReturned);
       }
     });
