@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 
 import { DatabaseService, Dev } from './../../services/database.service';
 import { Observable } from 'rxjs';
+import { promise } from 'protractor';
 
 @Component({
   selector: 'app-location-list',
@@ -16,12 +17,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./location-list.page.scss'],
 })
 export class LocationListPage implements OnInit {
+  index: number = 0;
+  loc: Dev = null;
+
   developers: Dev[] = [];
 
   products: Observable<any[]>;
 
   developer = {};
-  product = {};
 
   selectedView = 'devs';
   // input data from modal
@@ -44,25 +47,26 @@ export class LocationListPage implements OnInit {
         this.db.getDevs().subscribe(devs => {
           this.developers = devs;
         })
-        this.products = this.db.getProducts();
       }
     });
   }
 
   async choose(aId) {
-    // const del = this.db.getDeveloper(aId);
-    // console.log(del[0].id);
-    // const id = aId-1;
-    // const onClosedData: string =
-    //   this.developers[id].locationName + ", "
-    //   + this.developers[id].roadName + ", "
-    //   + this.developers[id].floor_room + ", "
-    //   + this.developers[id].tel + ", "
-    //   + this.developers[id].locationDetail + ", "
-    //   + this.developers[id].gpsValue;
-    console.log(aId);
-    await this.modalController.dismiss(aId);
-    // await this.modalController.dismiss(del[0].id);
+    console.log("==============================");
+    console.log("parameter: " + aId);
+    this.db.getDeveloper(aId).then(data => {
+      this.loc = data;
+      console.log("Location name from function get " + this.loc.id);
+      const dataReturn : string = 
+      this.loc.locationName+", "
+      +this.loc.roadName+", "
+      +this.loc.floor_room+", "
+      +this.loc.tel+", "
+      +this.loc.locationDetail+", "
+      +this.loc.gpsValue+", "
+      this.modalController.dismiss(dataReturn);
+    });
+    // await this.modalController.dismiss(this.loc.id);
   }
 
   // async notifications(ev: any) {

@@ -12,10 +12,7 @@ import { Observable } from 'rxjs';
 export class LocationAddDetailPage implements OnInit {
   developers: Dev[] = [];
 
-  products: Observable<any[]>;
-
   developer = {};
-  product = {};
 
   selectedView = 'devs';
 
@@ -27,7 +24,6 @@ export class LocationAddDetailPage implements OnInit {
         this.db.getDevs().subscribe(devs => {
           this.developers = devs;
         })
-        this.products = this.db.getProducts();
       }
     });
   }
@@ -52,14 +48,6 @@ export class LocationAddDetailPage implements OnInit {
         this.developer = {};
         this.router.navigateByUrl("/callwash");
       });
-  }
-
-  addProduct() {
-    this.db.addProduct(this.product['name'], this.product['creator'])
-      .then(_ => {
-        this.product = {};
-      });
-
   }
 
 }

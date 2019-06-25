@@ -15,12 +15,9 @@ import { DatabaseService, Dev } from './../../services/database.service';
 })
 export class CallwashPage {
   //SQLite
-  developers: Dev[] = [];
+  developerss: Dev;
  
-  products: Observable<any[]>;
- 
-  developer = {};
-  product = {};
+  // developer = {};
  
   selectedView = 'devs';
   // -SQLite
@@ -45,16 +42,7 @@ export class CallwashPage {
     private alertController: AlertController,
     private db: DatabaseService) { }
 
-  ngOnInit() {
-    this.db.getDatabaseState().subscribe(rdy => {
-      if (rdy) {
-        this.db.getDevs().subscribe(devs => {
-          this.developers = devs;
-        })
-        this.products = this.db.getProducts();
-      }
-    });
-  }
+  ngOnInit() {}
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -73,6 +61,10 @@ export class CallwashPage {
       }
     });
     return await modal.present();
+  }
+
+  reLoad(){
+    console.log(this.db.getDeveloper(this.dataReturned));
   }
 
   booleanChange() {
