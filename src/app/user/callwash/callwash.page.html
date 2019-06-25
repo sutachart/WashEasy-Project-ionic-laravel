@@ -46,26 +46,14 @@
           </ion-label>
         </ion-card-header>
         <ion-card-content>
-          <ion-label>
+          <ion-label (ionChange)="reLoad()">
             <span style="font-size: 14px;" *ngIf="!dataReturned">โปรดเลือก</span>
             <span style="font-size: 14px;" *ngIf="dataReturned">{{dataReturned}}</span>
           </ion-label>
-          <ion-list>
-            <ion-item button *ngFor="let dev of developers" [routerLink]="['/', 'developers', dev.id]">
-              <ion-avatar slot="start">
-                <img [src]="dev.floor_room">
-              </ion-avatar>
-              <ion-label>
-                <h2>{{ dev.locationName }}</h2>
-                <p>{{ dev.roadName }}</p>
-              </ion-label>
-            </ion-item>
-          </ion-list>
         </ion-card-content>
       </ion-item>
     </ion-card>
   </form>
-
 
   <!-- Price -->
   <form>
