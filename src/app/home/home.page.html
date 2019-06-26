@@ -9,9 +9,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-item>
-    <ion-label class="ion-align-items-center" class="ion-align-self-center" class="ion-text-center">HELLO WORLD
-    </ion-label>
-  </ion-item>
+<ion-content>
+  <!-- <ion-label class="ion-align-items-center" class="ion-align-self-center" class="ion-text-center" *ngIf="status==0">HELLO WORLD{{status}}
+    </ion-label> -->
+  <ion-card *ngIf="status==null" style="border: solid rgb(92, 209, 255) 0.5px;">
+    <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">เรียกบริการรับผ้า</ion-card-header>
+  </ion-card>
+  <ion-card *ngIf="status==1" style="border: solid royalblue 0.5px;">
+    <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">รอการตอบรับ</ion-card-header>
+    <ion-card-content class="ion-text-center">Order จาก Wash-man</ion-card-content>
+    <ion-button style="float: right;" color="medium" (click)="cancelCall()">ยกเลิก</ion-button>
+  </ion-card>
+
 </ion-content>

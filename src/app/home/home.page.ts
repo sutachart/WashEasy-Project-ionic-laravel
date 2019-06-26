@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,21 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  // Params from callwash
+  status: any;
 
+  constructor(private router: Router, private route: ActivatedRoute) {
+
+    // Receive params from callwash
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.status = this.router.getCurrentNavigation().extras.state.status;
+      }
+      // console.log('Home',this.status);
+    });
+  }
+
+  cancelCall() {
+    this.status = null;
+  }
 }

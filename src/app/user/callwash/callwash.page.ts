@@ -4,10 +4,9 @@ import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DatabaseService, Dev } from './../../services/database.service';
-import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-callwash',
@@ -17,7 +16,6 @@ import { threadId } from 'worker_threads';
 export class CallwashPage {
   //SQLite
   developerss: Dev;
-
   // developer = {};
 
   selectedView = 'devs';
@@ -31,13 +29,15 @@ export class CallwashPage {
   price: any; // price of service
   select: any; // keep number service choice
   serv_name: any; // keep name service choice
-
-  washService: boolean = false;
-  steamService: boolean = false;
+  washService: boolean = false; // boolean wash service
+  steamService: boolean = false; // boolean steam service
 
   // Get lat Long
   latt: any;
-  long:any;
+  long: any;
+
+  // Status Home
+  status: any;
 
   constructor(
     public modalController: ModalController,
@@ -50,11 +50,10 @@ export class CallwashPage {
 
     // Get Params from Gps-map
     this.route.queryParams.subscribe(params => {
-      if(this.router.getCurrentNavigation().extras.state){
+      if (this.router.getCurrentNavigation().extras.state) {
         this.latt = this.router.getCurrentNavigation().extras.state.latt;
         this.long = this.router.getCurrentNavigation().extras.state.long;
       }
-      console.log(this.latt,' ',this.long);
     });
   }
 
@@ -106,11 +105,11 @@ export class CallwashPage {
     let date = new Date().toLocaleString();
     this.datetime = date;
 
-    console.log('Wash :', this.washService);
-    console.log('Steam :', this.steamService);
-    console.log('Service :', this.select);
-    console.log('Price :', this.price);
-    console.log('Datetime :', this.datetime);
+    // console.log('Wash :', this.washService);
+    // console.log('Steam :', this.steamService);
+    // console.log('Service :', this.select);
+    // console.log('Price :', this.price);
+    // console.log('Datetime :', this.datetime);
 
   }
 
@@ -118,7 +117,6 @@ export class CallwashPage {
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'ยืนยันการเรียก',
-      // subHeader: 'Sub header',
       message: '<br>บริการ : ' + this.serv_name + '<br> ' + 'ราคา : ' + this.price,
       buttons: [
         {
@@ -130,21 +128,29 @@ export class CallwashPage {
           role: 'confirm',
           handler: () => {
 
-            console.log("Confirm!");
+            // Api & Params
             let url: string = "http://localhost:8000/api/insertCallwash";
             let dataJson = new FormData();
             dataJson.append('serv_price', this.price); // total Price
             dataJson.append('serv_choice', this.select); // total Choice
             dataJson.append('serv_date', this.datetime); // date time
+            dataJson.append('serv_latt', this.latt); // Latitude
+            dataJson.append('serv_long', this.long); // Longtitude
 
             let data: Observable<any> = this.http.post(url, dataJson)
             data.subscribe(res => {
-              if (res != null)
-                console.log(res);
+              if (res != null) {
+                console.log('response :', res.status);
+
+                // Send Params to home.page
+                let statusHome: NavigationExtras = {
+                  state: {
+                    status: res.status
+                  }
+                }
+                this.router.navigate(['home'], statusHome);
+              }
             });
-            this.router.navigateByUrl('/home');
-
-
           }
         }
       ]
