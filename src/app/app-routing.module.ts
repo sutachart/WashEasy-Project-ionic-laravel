@@ -35,8 +35,8 @@ const routes: Routes = [
     path: 'washman/home', loadChildren: './washman/home/home.module#HomePageModule'
   },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'developers', loadChildren: './pages/developers/developers.module#DevelopersPageModule' },
-  { path: 'developers/:id', loadChildren: './pages/developer/developer.module#DeveloperPageModule' }
+  // { path: 'developers', loadChildren: './pages/developers/developers.module#DevelopersPageModule' },
+  // { path: 'developers/:id', loadChildren: './pages/developer/developer.module#DeveloperPageModule' }
 ];
 
 @NgModule({
