@@ -3,22 +3,16 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>HOME</ion-title>
+    <ion-title>รายการเรียกรับผ้า</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-    <ion-card-header class="ion-text-center" style="color: black;">
-      ORDER รอรับ
-    </ion-card-header>
-  </ion-card>
-  <ion-card>
     <ion-card-content>
       <ion-item *ngFor="let order of orders">
-        <ion-row>
+        <ion-row (click)="acceptOrder()">
           <ion-label>{{order.name}}</ion-label>
-          <ion-button class="ion-text-right">รับ</ion-button>
         </ion-row>
       </ion-item>
     </ion-card-content>
