@@ -39,8 +39,13 @@ export class DatabaseService {
       })
         .then((db: SQLiteObject) => {
           this.database = db;
+          // this.seedDatabase();
+          db.executeSql('CREATE TABLE IF NOT EXISTS developer(id INTEGER PRIMARY KEY AUTOINCREMENT,locationName TEXT,roadName TEXT,floor_room TEXT,tel TEXT,locationDetail TEXT,gpsValue TEXT);', [])
+            .then(() => console.log('Executed SQL'))
+            .catch(e => console.log(e));
           this.seedDatabase();
-        });
+        })
+        .catch(e => console.log(e));
     });
   }
 
@@ -113,9 +118,9 @@ export class DatabaseService {
 
   deleteDeveloper(id) {
     return this.database.executeSql('DELETE FROM developer WHERE id = ?', [id])
-    .then(_ => {
-      this.loadDevelopers();
-    });
+      .then(_ => {
+        this.loadDevelopers();
+      });
   }
 
   updateDeveloper(dev: Dev) {

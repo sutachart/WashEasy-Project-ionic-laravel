@@ -11,20 +11,20 @@ export class HomePage {
 
 
   public orders = [
-    { id: '11', name: 'Order1' },
-    { id: '12', name: 'Order2' },
-    { id: '13', name: 'Order3' }
+    { id: '0', name: 'Order1' },
+    { id: '1', name: 'Order2' },
+    { id: '2', name: 'Order3' }
   ]
   constructor(
     private alertController: AlertController,
     private router: Router,
     private route: ActivatedRoute) { }
 
-  async acceptOrder() {
+  async acceptOrder(orderId) {
     const alert = await this.alertController.create({
-      header: 'ต้องการรับรายการ?',
+      header: 'ยืนยัน',
       // subHeader: 'Sub header',
-      message: 'ยืนยันที่จะรับรายการ' + this.orders[0] + '?',
+      message: 'ยืนยันที่จะรับรายการ' + this.orders[orderId].name + '?',
       buttons: [
         {
           text: 'ยกเลิก',

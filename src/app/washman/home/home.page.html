@@ -10,8 +10,8 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <ion-item *ngFor="let order of orders">
-        <ion-row (click)="acceptOrder()">
+      <ion-item lines="none" *ngFor="let order of orders">
+        <ion-row (click)="acceptOrder(order.id)">
           <ion-label>{{order.name}}</ion-label>
         </ion-row>
       </ion-item>
