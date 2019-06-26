@@ -1,12 +1,13 @@
 import { LocationListPage } from './../location-list/location-list.page';
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DatabaseService, Dev } from './../../services/database.service';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-callwash',
@@ -16,9 +17,9 @@ import { DatabaseService, Dev } from './../../services/database.service';
 export class CallwashPage {
   //SQLite
   developerss: Dev;
- 
+
   // developer = {};
- 
+
   selectedView = 'devs';
   // -SQLite
 
@@ -34,15 +35,30 @@ export class CallwashPage {
   washService: boolean = false;
   steamService: boolean = false;
 
+  // Get lat Long
+  latt: any;
+  long:any;
+
   constructor(
     public modalController: ModalController,
     private router: Router,
+    private route: ActivatedRoute,
     public navHttp: Http,
     public http: HttpClient,
     private alertController: AlertController,
-    private db: DatabaseService) { }
+    private db: DatabaseService) {
 
-  ngOnInit() {}
+    // Get Params from Gps-map
+    this.route.queryParams.subscribe(params => {
+      if(this.router.getCurrentNavigation().extras.state){
+        this.latt = this.router.getCurrentNavigation().extras.state.latt;
+        this.long = this.router.getCurrentNavigation().extras.state.long;
+      }
+      console.log(this.latt,' ',this.long);
+    });
+  }
+
+  ngOnInit() { }
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -63,7 +79,7 @@ export class CallwashPage {
     return await modal.present();
   }
 
-  reLoad(){
+  reLoad() {
     console.log(this.db.getDeveloper(this.dataReturned));
   }
 

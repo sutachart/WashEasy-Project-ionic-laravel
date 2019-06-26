@@ -1,6 +1,6 @@
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 declare var google;
 
 @Component({
@@ -52,7 +52,15 @@ export class GpsMapPage  implements AfterViewInit {
   }
 
   addDetails(){
-    this.router.navigateByUrl("/location-add-detail")
+    let latlong:NavigationExtras = {
+      state: {
+        latt: this.latitude,
+        long: this.longtitude
+      }
+    }
+    this.router.navigate(['callwash'], latlong);
+    this.router.navigateByUrl("/location-add-detail");
+    
   }
 
 
