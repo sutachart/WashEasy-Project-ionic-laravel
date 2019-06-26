@@ -52,6 +52,7 @@ export class GpsMapPage  implements AfterViewInit {
   }
 
   addDetails(){
+    // Send lat long to callwash
     let latlong:NavigationExtras = {
       state: {
         latt: this.latitude,

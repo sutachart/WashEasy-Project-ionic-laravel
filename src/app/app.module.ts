@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LocationListPageModule } from './user/location-list/location-list.module';
 
 import { MoreLocationListComponent } from './more-location-list/more-location-list.component';
-
+import { Firebase } from '@ionic-native/firebase/ngx'
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 

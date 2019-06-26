@@ -20,7 +20,7 @@ export class LoginPage {
   fnLogin() {
     console.log("user :", this.user.username);
     console.log("pass :", this.user.password);
-    
+
     let url: string = "http://localhost:8000/api/loginUser";
     let dataJson = new FormData();
     dataJson.append('username', this.user.username);
