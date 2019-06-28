@@ -20,5 +20,10 @@
     <ion-card-content class="ion-text-center">Order จาก Wash-man</ion-card-content>
     <ion-button style="float: right;" color="medium" (click)="cancelCall()">ยกเลิก</ion-button>
   </ion-card>
+  <ion-card *ngIf="status==2" style="border: solid royalblue 0.5px;">
+    <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">Wash-man กำลังไปรับผ้า</ion-card-header>
+    <ion-card-content class="ion-text-center">ในเวลาอีก 30 นาที</ion-card-content>
+    <ion-button style="float: right;" color="medium" (click)="cancelCall()">ยกเลิก</ion-button>
+  </ion-card>
 
 </ion-content>

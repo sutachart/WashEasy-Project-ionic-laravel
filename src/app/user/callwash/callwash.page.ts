@@ -127,7 +127,7 @@ export class CallwashPage {
           text: 'Confirm',
           role: 'confirm',
           handler: () => {
-
+            this.status = 1;
             // Api & Params
             let url: string = "http://localhost:8000/api/insertCallwash";
             let dataJson = new FormData();
@@ -136,11 +136,12 @@ export class CallwashPage {
             dataJson.append('serv_date', this.datetime); // date time
             dataJson.append('serv_latt', this.latt); // Latitude
             dataJson.append('serv_long', this.long); // Longtitude
+            dataJson.append('serv_status', this.status); // Longtitude
 
             let data: Observable<any> = this.http.post(url, dataJson)
             data.subscribe(res => {
               if (res != null) {
-                console.log('response :', res.status);
+                console.log(JSON.stringify(res));
 
                 // Send Params to home.page
                 let statusHome: NavigationExtras = {

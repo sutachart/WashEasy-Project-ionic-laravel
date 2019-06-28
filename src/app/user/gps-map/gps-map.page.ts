@@ -60,7 +60,7 @@ export class GpsMapPage implements AfterViewInit {
       }
     }
     this.router.navigate(['callwash'], latlong);
-    this.router.navigateByUrl("/location-add-detail");
+    //this.router.navigateByUrl("/location-add-detail");
 
   }
 
