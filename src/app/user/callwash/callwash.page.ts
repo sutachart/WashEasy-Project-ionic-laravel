@@ -129,14 +129,15 @@ export class CallwashPage {
           handler: () => {
             this.status = 1;
             // Api & Params
-            let url: string = "http://localhost:8000/api/insertCallwash";
+            let url: string = "http://localhost:8000/api/insertOrder";
             let dataJson = new FormData();
-            dataJson.append('serv_price', this.price); // total Price
-            dataJson.append('serv_choice', this.select); // total Choice
-            dataJson.append('serv_date', this.datetime); // date time
-            dataJson.append('serv_latt', this.latt); // Latitude
-            dataJson.append('serv_long', this.long); // Longtitude
-            dataJson.append('serv_status', this.status); // Longtitude
+            dataJson.append('order_price', this.price); // total Price
+            dataJson.append('order_service', this.select); // total Choice
+            // dataJson.append('serv_date', this.datetime); // date time
+            dataJson.append('order_address', '123 บ้าน'); // Address
+            dataJson.append('order_latitude', this.latt); // Latitude
+            dataJson.append('order_longtitude', this.long); // Longtitude
+            // dataJson.append('order_status', this.status); // Longtitude
 
             let data: Observable<any> = this.http.post(url, dataJson)
             data.subscribe(res => {
