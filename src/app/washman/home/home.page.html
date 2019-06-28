@@ -10,9 +10,15 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <ion-item lines="none" *ngFor="let order of orders">
+      <!-- <ion-item lines="none" *ngFor="let order of orders">
         <ion-row (click)="acceptOrder(order.id)">
           <ion-label>{{order.name}}</ion-label>
+        </ion-row>
+      </ion-item> -->
+      <ion-item *ngFor="let res of resent.status">
+        <ion-row>
+          <ion-label>{{res.user_id}}&nbsp;</ion-label>
+          <ion-label>{{res.user_address}}</ion-label>
         </ion-row>
       </ion-item>
     </ion-card-content>

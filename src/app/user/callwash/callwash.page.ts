@@ -127,23 +127,28 @@ export class CallwashPage {
           text: 'Confirm',
           role: 'confirm',
           handler: () => {
-            this.status = 1;
-            // Api & Params
-            let url: string = "http://localhost:8000/api/insertOrder";
+            let url: string = "http://127.0.0.1:8000/api/updateTransaction";
             let dataJson = new FormData();
-            dataJson.append('order_price', this.price); // total Price
-            dataJson.append('order_service', this.select); // total Choice
-            // dataJson.append('serv_date', this.datetime); // date time
-            dataJson.append('order_address', '123 บ้าน'); // Address
-            dataJson.append('order_latitude', this.latt); // Latitude
-            dataJson.append('order_longtitude', this.long); // Longtitude
-            // dataJson.append('order_status', this.status); // Longtitude
+            dataJson.append('status', '0'); // status
 
-            let data: Observable<any> = this.http.post(url, dataJson)
+            let data: Observable<any> = this.http.post(url, dataJson);
             data.subscribe(res => {
               if (res != null) {
-                console.log(JSON.stringify(res));
+                console.log(JSON.stringify(res.transaction[0].tran_id));
+                this.status = res.transaction[0].tran_id;
 
+                // Api & Params
+                let url: string = "http://localhost:8000/api/insertUser";
+                let dataJson = new FormData();
+                dataJson.append('order_price', this.price); // total Price
+                dataJson.append('order_service', this.select); // total Choice
+                // dataJson.append('serv_date', this.datetime); // date time
+                dataJson.append('order_address', '123 บ้าน'); // Address
+                dataJson.append('order_latitude', this.latt); // Latitude
+                dataJson.append('order_longtitude', this.long); // Longtitude
+                dataJson.append('order_tid', this.status); // Tid
+                let data: Observable<any> = this.http.post(url, dataJson);
+                data.subscribe(res => { });
                 // Send Params to home.page
                 let statusHome: NavigationExtras = {
                   state: {

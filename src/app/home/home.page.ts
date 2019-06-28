@@ -39,9 +39,9 @@ export class HomePage implements AfterViewInit {
     let data: Observable<any> = this.http.post(url, dataJson)
     data.subscribe(res => {
       if (res != null) {
-        console.log('db:', res.status[0].status);
+        // console.log('status form DB:', res.status[0].status);
         this.status = res.status[0].status;
-        console.log(this.status);
+        console.log('Status:', this.status);
       }
     });
   }
