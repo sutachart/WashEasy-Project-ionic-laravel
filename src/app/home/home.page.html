@@ -12,17 +12,29 @@
 <ion-content>
   <!-- <ion-label class="ion-align-items-center" class="ion-align-self-center" class="ion-text-center" *ngIf="status==0">HELLO WORLD{{status}}
     </ion-label> -->
-  <ion-card *ngIf="status==null" style="border: solid rgb(92, 209, 255) 0.5px;">
+  <ion-card padding *ngIf="status==null" style="border: solid rgb(92, 209, 255) 0.5px;">
     <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">เรียกบริการรับผ้า</ion-card-header>
   </ion-card>
   <ion-card *ngIf="status==0" style="border: solid royalblue 0.5px;">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
     <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">รอการตอบรับ</ion-card-header>
-    <ion-card-content class="ion-text-center">Order จาก Wash-man</ion-card-content>
-    <ion-button style="float: right;" color="medium" (click)="cancelCall()">ยกเลิก</ion-button>
+    <ion-card-content class="ion-text-center">รอการตอบรับจาก Wash-man</ion-card-content>
+
+    <ion-img src="/assets/image/motorcycle.png" style="height: 10;width: 10;"></ion-img>
+    <ion-button vertical="top" horizontal="end" style="float: right;--border-radius: 70px;" fill="outline"
+      color="medium" (click)="cancelCall()">ยกเลิก</ion-button>
+    <!-- fab placed to the top end -->
+    <!-- <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="cancelCall()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
   </ion-card>
   <ion-card *ngIf="status==1" style="border: solid royalblue 0.5px;">
-    <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">Wash-man กำลังไปรับผ้า</ion-card-header>
+    <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">Wash-man กำลังไปรับผ้า
+    </ion-card-header>
     <ion-card-content class="ion-text-center">ในเวลาอีก 30 นาที</ion-card-content>
+    <ion-progress-bar value="0.25" buffer="0.5"></ion-progress-bar>
     <ion-button style="float: right;" color="medium" (click)="cancelCall()">ยกเลิก</ion-button>
   </ion-card>
 
