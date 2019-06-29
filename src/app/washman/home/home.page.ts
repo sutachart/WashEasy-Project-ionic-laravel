@@ -92,7 +92,7 @@ export class HomePage implements AfterViewInit {
     data.subscribe(res => {
       if (res != null) {
         this.resent = res;
-        console.log(this.resent.status);
+        // console.log(this.resent.status);
 
       }
     });
