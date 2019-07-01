@@ -16,12 +16,10 @@
     <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">เรียกบริการรับผ้า</ion-card-header>
   </ion-card>
   <ion-card *ngIf="status==0" style="border: solid royalblue 0.5px;">
-    
     <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">รอการตอบรับ</ion-card-header>
     <ion-card-content class="ion-text-center">รอการตอบรับจาก Wash-man</ion-card-content>
-
-    <ion-img src="/assets/image/scooter.png" style="height: 20%;width: 20%;"></ion-img>
-    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    <ion-img src="/assets/image/scooter.png" style="height: 20%;width: 20%;padding-left: 5%"></ion-img>
+    <ion-progress-bar type="indeterminate" reversed="true"></ion-progress-bar>
     <ion-button vertical="top" horizontal="end" style="float: right;--border-radius: 70px;" fill="outline"
       color="medium" (click)="cancelCall()">ยกเลิก</ion-button>
     <!-- fab placed to the top end -->
