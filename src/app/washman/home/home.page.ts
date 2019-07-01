@@ -1,7 +1,6 @@
-import { CallwashPage } from './../../user/callwash/callwash.page';
 import { Component, AfterViewInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
@@ -84,7 +83,6 @@ export class HomePage implements AfterViewInit {
   // }
 
   ngAfterViewInit() {
-
     let url: string = "http://127.0.0.1:8000/api/getCallwash";
     let dataJson = new FormData();
     let data: Observable<any> = this.http.post(url, dataJson)
@@ -97,18 +95,13 @@ export class HomePage implements AfterViewInit {
   }
 
   fetchAddress(tid) {
-    console.log(tid);
-    // let url: string = "http://127.0.0.1:8000/api/getCallwash";
-    // let dataJson = new FormData();
-    // dataJson.append('tid', tid); // insert tid to wash
-    // let data: Observable<any> = this.http.post(url, dataJson)
-    // data.subscribe(res => {
-    //   if (res != null) {
-    //     this.resent = res;
-    //     console.log(this.resent);
-        
-    //   }
-    // });
+    // console.log(tid);
+    let tidFromWashman: NavigationExtras = {
+      state: {
+        tid: tid
+      }
+    }
+    this.router.navigate(['map-direction'], tidFromWashman);
 
   }
 }

@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -21,11 +21,22 @@ export class MapDirectionPage implements AfterViewInit {
   // long = 102.827978;
   latt: any;
   long: any;
+  tid: any;
+  address: any;
 
   constructor(private alertController: AlertController,
     private router: Router,
     public navHttp: Http,
-    public http: HttpClient) { }
+    public http: HttpClient,
+    private route: ActivatedRoute) {
+
+    // Receive params from callwash
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.tid = this.router.getCurrentNavigation().extras.state.tid;
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
     let directionsDisplay = new google.maps.DirectionsRenderer;
@@ -41,13 +52,14 @@ export class MapDirectionPage implements AfterViewInit {
 
     let url: string = "http://127.0.0.1:8000/api/getAddress";
     let dataJson = new FormData();
-    // dataJson.append('tid', tid); // insert tid to wash
+    dataJson.append('tid', this.tid); // insert tid to wash
     let data: Observable<any> = this.http.post(url, dataJson)
     data.subscribe(res => {
       if (res != null) {
+        // console.log(res);
         this.latt = parseFloat(res.status[0].user_latitude);
         this.long = parseFloat(res.status[0].user_longtitude);
-
+        this.address = res.status[0].user_address;
       }
     });
 

@@ -148,14 +148,26 @@ export class CallwashPage {
                 dataJson.append('order_longtitude', this.long); // Longtitude
                 dataJson.append('order_tid', this.status); // Tid
                 let data: Observable<any> = this.http.post(url, dataJson);
-                data.subscribe(res => { });
-                // Send Params to home.page
-                let statusHome: NavigationExtras = {
-                  state: {
-                    status: res.status
+                data.subscribe(res => {
+                  let url: string = "http://127.0.0.1:8000/api/insertTidWashman";
+                  let dataJson = new FormData();
+                  dataJson.append('tid', this.status); // insert tid to wash
+                  let data: Observable<any> = this.http.post(url, dataJson)
+                  data.subscribe(res => {
+                    if (res != null) {
+                      console.log(res)
+                      // console.log(this.resent);
+                    }
+                  });
+
+                  // Send Params to home.page
+                  let statusHome: NavigationExtras = {
+                    state: {
+                      status: res.status
+                    }
                   }
-                }
-                this.router.navigate(['home'], statusHome);
+                  this.router.navigate(['home'], statusHome);
+                });
               }
             });
           }

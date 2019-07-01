@@ -76,10 +76,12 @@ class ApiController extends Controller
         ]);
     }
 
-    public function getAddress(){
+    public function getAddress(Request $request){
+        $tid = $request['tid'];
         $result = DB::table('user')
             ->select('user.user_service','user.user_price','user.user_address','user.user_latitude','user.user_longtitude','user.user_id')
             ->join('washman','user.tid','=','washman.tid')
+            ->where('washman.tid','=', $tid)
             ->get();
     return response()->json(['status' => $result]);   
     }
