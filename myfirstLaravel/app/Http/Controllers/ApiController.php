@@ -85,4 +85,13 @@ class ApiController extends Controller
             ->get();
     return response()->json(['status' => $result]);   
     }
+
+    public function acceptRequest(Request $request){
+        $tid = $request['tid'];
+        $result = DB::table('transaction')
+            ->where('tran_id','=',$tid)
+            ->update(array('status' => 1));
+
+    return response()->json(['success']);   
+    }
 }
