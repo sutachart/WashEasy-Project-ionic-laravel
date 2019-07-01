@@ -23,6 +23,9 @@ export class MapDirectionPage implements AfterViewInit {
   long: any;
   tid: any;
   address: any;
+  username: any;
+  service: any;
+  price: any;
 
   constructor(private alertController: AlertController,
     private router: Router,
@@ -60,6 +63,10 @@ export class MapDirectionPage implements AfterViewInit {
         this.latt = parseFloat(res.status[0].user_latitude);
         this.long = parseFloat(res.status[0].user_longtitude);
         this.address = res.status[0].user_address;
+        this.username = res.status[0].user_id;
+        this.service = res.status[0].user_service;
+        this.price = res.status[0].user_price;
+
       }
     });
 
@@ -70,7 +77,7 @@ export class MapDirectionPage implements AfterViewInit {
   async acceptAlert() {
     const alert = await this.alertController.create({
       header: 'ยืนยันคำร้อง',
-      message: '',
+      message: '<br>ชื่อ : ' + this.username + '<br>บริการ : ' + this.service + '<br>ราคา : ' + this.price + ' บาท',
       buttons: [
         {
           text: 'ยกเลิก',
