@@ -46,7 +46,6 @@ const routes: Routes = [
     path: 'map-direction',
     loadChildren: './washman/map-direction/map-direction.module#MapDirectionPageModule'
   },
-  { path: 'cancelation', loadChildren: './user/cancelation/cancelation.module#CancelationPageModule' },
   { path: 'cancellation', loadChildren: './user/cancellation/cancellation.module#CancellationPageModule' }
 
   // { path: 'developers', loadChildren: './pages/developers/developers.module#DevelopersPageModule' },

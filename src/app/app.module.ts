@@ -1,3 +1,4 @@
+import { CancellationPageModule } from './user/cancellation/cancellation.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -28,7 +29,8 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
     AppRoutingModule,
     HttpModule,
     HttpClientModule,
-    LocationListPageModule
+    LocationListPageModule,
+    CancellationPageModule
   ],
   providers: [
     StatusBar,
