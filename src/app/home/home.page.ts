@@ -41,7 +41,7 @@ export class HomePage implements AfterViewInit {
       if (res != null) {
         // console.log('status form DB:', res.status[0].status);
         this.status = res.status[0].status;
-        console.log('Status:', this.status);
+        // console.log('Status:', this.status);
       }
     });
   }

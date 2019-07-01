@@ -23,7 +23,7 @@
         </ion-row>
       </ion-item> -->
       <ion-item *ngFor="let res of resent.status">
-        <ion-row>
+        <ion-row (click)="fetchAddress(res.tid)">
           <ion-label>{{res.user_id}}&nbsp;</ion-label>
           <ion-label>{{res.user_address}}</ion-label>
         </ion-row>

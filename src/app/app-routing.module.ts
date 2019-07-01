@@ -34,8 +34,19 @@ const routes: Routes = [
   {
     path: 'washman/home', loadChildren: './washman/home/home.module#HomePageModule'
   },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'wash-cancel', loadChildren: './washman/wash-cancel/wash-cancel.module#WashCancelPageModule' }
+  {
+    path: 'login',
+    loadChildren: './login/login.module#LoginPageModule'
+  },
+  {
+    path: 'wash-cancel',
+    loadChildren: './washman/wash-cancel/wash-cancel.module#WashCancelPageModule'
+  },
+  {
+    path: 'map-direction',
+    loadChildren: './washman/map-direction/map-direction.module#MapDirectionPageModule'
+  }
+
   // { path: 'developers', loadChildren: './pages/developers/developers.module#DevelopersPageModule' },
   // { path: 'developers/:id', loadChildren: './pages/developer/developer.module#DeveloperPageModule' }
 ];

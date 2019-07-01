@@ -87,14 +87,28 @@ export class HomePage implements AfterViewInit {
 
     let url: string = "http://127.0.0.1:8000/api/getCallwash";
     let dataJson = new FormData();
-
     let data: Observable<any> = this.http.post(url, dataJson)
     data.subscribe(res => {
       if (res != null) {
         this.resent = res;
-        // console.log(this.resent.status);
-
+        console.log(this.resent);
       }
     });
+  }
+
+  fetchAddress(tid) {
+    console.log(tid);
+    // let url: string = "http://127.0.0.1:8000/api/getCallwash";
+    // let dataJson = new FormData();
+    // dataJson.append('tid', tid); // insert tid to wash
+    // let data: Observable<any> = this.http.post(url, dataJson)
+    // data.subscribe(res => {
+    //   if (res != null) {
+    //     this.resent = res;
+    //     console.log(this.resent);
+        
+    //   }
+    // });
+
   }
 }
