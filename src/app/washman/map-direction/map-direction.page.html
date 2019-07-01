@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Direction</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-button expand="block" (click)="calculateAndDisplayRoute()">แสดงตำแหน่ง</ion-button>
+  <div id="map" style="margin-left: 5%; margin-right: 5%;"></div>
+  <ion-item>
+    <ion-label>เวลา :</ion-label>
+    <div id="duration"></div>
+  </ion-item>
+  <ion-item>
+    <ion-label>ระยะทาง :</ion-label>
+    <div id="distance"></div>
+  </ion-item>
+  <ion-item>
+    <ion-label>ที่อยู่ :</ion-label>
+    <div>หอบ่าๆ ห้อง 12 ชั้น 3</div>
+  </ion-item>
+  <!-- <ion-item>
+    <ion-label>บริการ :</ion-label>
+    <div>ซัก,อบ</div>
+  </ion-item> -->
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="ion-text-center">
+    <ion-button style="width: 90px;" (click)="cancelAlert()">ยกเลิก</ion-button>
+    <ion-button style="width: 90px;" (click)="acceptAlert()">รับคำร้อง</ion-button>
+  </ion-toolbar>
+</ion-footer>

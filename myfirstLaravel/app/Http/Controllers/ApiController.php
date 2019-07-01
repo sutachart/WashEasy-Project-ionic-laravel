@@ -18,7 +18,6 @@ class ApiController extends Controller
     // }
 
     public function insertUser(Request $request){
-        $user_id;
         $user_address = $request['order_address'];
         $user_price = $request['order_price'];
         $user_service = $request['order_service'];
@@ -52,7 +51,7 @@ class ApiController extends Controller
     }
 
     public function checkStatus(){
-        $user_id = 12;
+        $user_id = 13;
         $result = DB::table('transaction')
             ->select('transaction.status')
             ->join('user','user.tid','=','transaction.tran_id')
@@ -63,10 +62,25 @@ class ApiController extends Controller
 
     public function getCallwash(){
         $result = DB::table('transaction')
-            ->select('transaction.status','user.user_id','user.user_address')
+            ->select('transaction.status','user.user_id','user.user_address','user.tid')
             ->join('user','user.tid','=','transaction.tran_id')
             ->where('status','=','0')
             ->get();
     return response()->json(['status' => $result]);
+    }
+
+    public function insertTidWashman(Request $request){
+        $tid = $request['tid'];
+        $result = DB::table('washman')->insert([
+            'tid' => $tid
+        ]);
+    }
+
+    public function getAddress(){
+        $result = DB::table('user')
+            ->select('user.user_service','user.user_price','user.user_address','user.user_latitude','user.user_longtitude','user.user_id')
+            ->join('washman','user.tid','=','washman.tid')
+            ->get();
+    return response()->json(['status' => $result]);   
     }
 }
