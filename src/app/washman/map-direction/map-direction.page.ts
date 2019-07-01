@@ -80,7 +80,16 @@ export class MapDirectionPage implements AfterViewInit {
           text: 'ตกลง',
           role: 'confirm',
           handler: () => {
-
+            let url: string = "http://127.0.0.1:8000/api/acceptRequest";
+            let dataJson = new FormData();
+            dataJson.append('tid', this.tid); // insert tid to wash
+            let data: Observable<any> = this.http.post(url, dataJson)
+            data.subscribe(res => {
+              if (res != null) {
+                console.log('Change status = 1');
+                this.router.navigateByUrl('home');
+              }
+            });
           }
         }
       ]
