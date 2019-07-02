@@ -19,18 +19,21 @@ import { MoreLocationListComponent } from './more-location-list/more-location-li
 import { Firebase } from '@ionic-native/firebase/ngx'
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
+import { IonicRatingModule } from 'ionic4-rating';
+
 
 @NgModule({
   declarations: [AppComponent, MoreLocationListComponent],
   entryComponents: [MoreLocationListComponent],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
     AppRoutingModule,
     HttpModule,
     HttpClientModule,
     LocationListPageModule,
-    CancellationPageModule
+    CancellationPageModule,
+    IonicRatingModule,
+    IonicModule.forRoot()
   ],
   providers: [
     StatusBar,
