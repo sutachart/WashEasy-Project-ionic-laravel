@@ -53,9 +53,10 @@ class ApiController extends Controller
     public function checkStatus(){
         $user_id = 13;
         $result = DB::table('transaction')
-            ->select('transaction.status')
+            ->select('transaction.status','user.tid','user.user_id')
             ->join('user','user.tid','=','transaction.tran_id')
             ->where('user.user_id','=',$user_id)
+            ->orderBy('tid', 'desc')
             ->get();
     return response()->json(['status' => $result]);
     }

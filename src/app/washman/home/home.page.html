@@ -22,16 +22,16 @@
           <ion-label>{{order.name}}</ion-label>
         </ion-row>
       </ion-item> -->
-      <ion-item *ngFor="let res of resent.status">
-        <ion-row (click)="fetchAddress(res.tid)">
+      <ion-item *ngFor="let res of resent">
+        <ion-row>
           <ion-label>{{res.user_id}}&nbsp;</ion-label>
           <ion-label>{{res.user_address}}</ion-label>
         </ion-row>
         <ion-row style="float: right;">
-          <ion-button style="float: right;">รับคำร้อง</ion-button>
+          <ion-button style="float: right;" (click)="fetchAddress(res.tid)">รับคำร้อง</ion-button>
         </ion-row>
       </ion-item>
     </ion-card-content>
   </ion-card>
-  
+
 </ion-content>

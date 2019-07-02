@@ -12,9 +12,11 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements AfterViewInit {
-  dataReturned :any;
+  dataReturned: any;
   // Params from callwash
   status: any = 0;
+  // Get user_id
+  userid:any;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -23,26 +25,15 @@ export class HomePage implements AfterViewInit {
     public modalController: ModalController) {
 
     // Receive params from callwash
-    this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.status = this.router.getCurrentNavigation().extras.state.status;
-      }
-      // console.log('Home',this.status);
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   if (this.router.getCurrentNavigation().extras.state) {
+    //     this.status = this.router.getCurrentNavigation().extras.state.status;
+    //   }
+    //   // console.log('Home',this.status);
+    // });
   }
 
-  async cancelCall() {
-    const modal = await this.modalController.create({
-      component: CancellationPage,
-      componentProps: {
-        // "paramID": 123,
-        // "paramTitle": "Test Title"
-      },
-      cssClass: 'cancelation-modal-css'
-    });
-    return await modal.present();
-    // this.status = null;
-  }
+
 
   ngAfterViewInit() {
     let url: string = "http://127.0.0.1:8000/api/checkStatus";
@@ -51,10 +42,22 @@ export class HomePage implements AfterViewInit {
     let data: Observable<any> = this.http.post(url, dataJson)
     data.subscribe(res => {
       if (res != null) {
-        // console.log('status form DB:', res.status[0].status);
         this.status = res.status[0].status;
-        // console.log('Status:', this.status);
+        this.userid = res.status[0].user_id;
+        // console.log(res.status[0].user_id);
       }
     });
+
+  } async cancelCall() {
+    const modal = await this.modalController.create({
+      component: CancellationPage,
+      componentProps: {
+        // "paramID": 123,
+        "user_id": this.userid
+      },
+      cssClass: 'cancelation-modal-css'
+    });
+    return await modal.present();
+    // this.status = null;
   }
 }

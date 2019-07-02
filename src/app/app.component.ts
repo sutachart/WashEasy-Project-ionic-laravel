@@ -16,23 +16,18 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'callwash',
+      title: 'Call-Wash',
       url: '/callwash',
       icon: 'car'
     },
     {
-      title: 'Home-washman',
+      title: 'Home-Washman',
       url: '/washman/home',
       icon: 'person'
     },
     {
       title: 'Login',
       url: '/login',
-      icon: 'contact'
-    },
-    {
-      title: 'Direction',
-      url: '/map-direction',
       icon: 'contact'
     }
   ];
