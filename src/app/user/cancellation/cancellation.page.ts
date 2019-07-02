@@ -1,3 +1,4 @@
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CancellationPage implements OnInit {
 
-  constructor() { }
+  constructor(private modalController : ModalController) { }
 
   ngOnInit() {
   }
+
+  cancel(){
+    this.modalController.dismiss();
+  }
+
+  confirm(){
+    this.modalController.dismiss();
+  }
+
+
 
 }
