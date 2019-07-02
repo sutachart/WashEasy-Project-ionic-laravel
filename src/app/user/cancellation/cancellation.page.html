@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>cancellation</ion-title>
+    <ion-title>ยกเลิกการเรียก</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-item>
+    <ion-label position="stacked">เหตุผล</ion-label>
+    <ion-textarea>
+    </ion-textarea>
+  </ion-item>
 
 </ion-content>
+<ion-footer>
+    <ion-row>
+      <ion-toolbar class="ion-text-center">
+          <ion-button fill="clear" (click)="confirm()">ยืนยัน</ion-button>
+        <ion-button fill="clear" color="medium" (click)="cancel()">ยกเลิก</ion-button>
+      </ion-toolbar>
+    </ion-row>
+  </ion-footer>
