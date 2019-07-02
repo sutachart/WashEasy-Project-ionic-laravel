@@ -18,13 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('getAddress',array('middleware' => 'cors','uses' => 'ApiController@getAddress'));
-
 Route::post('insertUser',array('middleware' => 'cors','uses' => 'ApiController@insertUser'));
 Route::post('updateTransaction',array('middleware' => 'cors','uses' => 'ApiController@updateTransaction'));
 Route::post('checkStatus',array('middleware' => 'cors','uses' => 'ApiController@checkStatus'));
 Route::post('getCallwash',array('middleware' => 'cors','uses' => 'ApiController@getCallwash'));
 Route::post('insertTidWashman',array('middleware' => 'cors','uses' => 'ApiController@insertTidWashman'));
 Route::post('acceptRequest',array('middleware' => 'cors','uses' => 'ApiController@acceptRequest'));
+Route::post('cancelRequest',array('middleware' => 'cors','uses' => 'ApiController@cancelRequest'));
 
 
 

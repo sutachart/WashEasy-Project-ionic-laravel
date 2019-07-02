@@ -66,7 +66,6 @@ export class MapDirectionPage implements AfterViewInit {
         this.username = res.status[0].user_id;
         this.service = res.status[0].user_service;
         this.price = res.status[0].user_price;
-
       }
     });
 
@@ -81,7 +80,19 @@ export class MapDirectionPage implements AfterViewInit {
       buttons: [
         {
           text: 'ยกเลิก',
-          role: 'cancel'
+          role: 'confirm',
+          // handler: () => {
+          //   let url: string = "http://127.0.0.1:8000/api/cancelRequest";
+          //   let dataJson = new FormData();
+          //   dataJson.append('tid', this.tid); // insert tid to wash
+          //   let data: Observable<any> = this.http.post(url, dataJson)
+          //   data.subscribe(res => {
+          //     if (res != null) {
+          //       console.log('Change status = C');
+          //       this.router.navigateByUrl('home');
+          //     }
+          //   });
+          // }
         },
         {
           text: 'ตกลง',
@@ -112,13 +123,22 @@ export class MapDirectionPage implements AfterViewInit {
       buttons: [
         {
           text: 'ยกเลิก',
-          role: 'cancel'
+          role: 'cancel',
         },
         {
-          text: 'ยืนยัน',
+          text: 'ตกลง',
           role: 'confirm',
           handler: () => {
-
+            let url: string = "http://127.0.0.1:8000/api/cancelRequest";
+            let dataJson = new FormData();
+            dataJson.append('tid', this.tid); // insert tid to wash
+            let data: Observable<any> = this.http.post(url, dataJson)
+            data.subscribe(res => {
+              if (res != null) {
+                console.log('Change status = C');
+                this.router.navigateByUrl('home');
+              }
+            });
           }
         }
       ]

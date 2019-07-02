@@ -94,4 +94,13 @@ class ApiController extends Controller
 
     return response()->json(['success']);   
     }
+
+    public function cancelRequest(Request $request){
+        $tid = $request['tid'];
+        $result = DB::table('transaction')
+            ->where('tran_id','=',$tid)
+            ->update(array('status' => 'C'));
+
+    return response()->json(['Cancel complete']);   
+    }
 }
