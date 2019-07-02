@@ -1,0 +1,30 @@
+<ion-toolbar color="primary">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Order รอส่ง</ion-title>
+</ion-toolbar>
+
+<ion-content>
+
+  <ion-card>
+    <h4 class="ion-text-center" style="color: black;">
+      Order รอส่งผ้า
+    </h4>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item *ngFor="let res of order">
+        <ion-row>
+          <ion-label>{{res.user_id}}&nbsp;</ion-label>
+          <ion-label>{{res.user_address}}</ion-label>
+        </ion-row>
+        <ion-row style="float: right;">
+          <ion-button style="float: right;" (click)="fetchAddress(res.tid)">ยืนยันการส่ง</ion-button>
+        </ion-row>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

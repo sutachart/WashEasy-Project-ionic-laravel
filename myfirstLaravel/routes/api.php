@@ -22,10 +22,12 @@ Route::post('insertUser',array('middleware' => 'cors','uses' => 'ApiController@i
 Route::post('updateTransaction',array('middleware' => 'cors','uses' => 'ApiController@updateTransaction'));
 Route::post('checkStatus',array('middleware' => 'cors','uses' => 'ApiController@checkStatus'));
 Route::post('getCallwash',array('middleware' => 'cors','uses' => 'ApiController@getCallwash'));
+Route::post('acceptCallwash',array('middleware' => 'cors','uses' => 'ApiController@acceptCallwash'));
 Route::post('insertTidWashman',array('middleware' => 'cors','uses' => 'ApiController@insertTidWashman'));
 Route::post('acceptRequest',array('middleware' => 'cors','uses' => 'ApiController@acceptRequest'));
 Route::post('cancelRequest',array('middleware' => 'cors','uses' => 'ApiController@cancelRequest'));
-
+Route::post('takeOrder',array('middleware' => 'cors','uses' => 'ApiController@takeOrder'));
+Route::post('sendOrder',array('middleware' => 'cors','uses' => 'ApiController@sendOrder'));
 
 
 

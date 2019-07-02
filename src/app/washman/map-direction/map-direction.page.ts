@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+import { ModalController } from '@ionic/angular';
+import { CancellationPage } from '../../user/cancellation/cancellation.page';
 declare var google;
 
 @Component({
@@ -31,7 +33,8 @@ export class MapDirectionPage implements AfterViewInit {
     private router: Router,
     public navHttp: Http,
     public http: HttpClient,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    public modalController: ModalController) {
 
     // Receive params from callwash
     this.route.queryParams.subscribe(params => {
@@ -208,5 +211,18 @@ export class MapDirectionPage implements AfterViewInit {
         window.alert('Directions request failed due to ' + status);
       }
     });
+  }
+
+  async cancelCall() {
+    const modal = await this.modalController.create({
+      component: CancellationPage,
+      componentProps: {
+        // "paramID": 123,
+        "tid": this.tid
+      },
+      cssClass: 'cancelation-modal-css'
+    });
+    return await modal.present();
+    // this.status = null;
   }
 }

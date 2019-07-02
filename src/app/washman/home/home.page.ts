@@ -16,6 +16,7 @@ export class HomePage implements AfterViewInit {
 
   // Param array
   public resent = [];
+  public status = [];
 
   public orders = [
     { id: '0', name: 'Order1' },
@@ -37,7 +38,16 @@ export class HomePage implements AfterViewInit {
     data.subscribe(res => {
       if (res != null) {
         this.resent = res.status;
-        // console.log(this.resent);
+
+        let url: string = "http://127.0.0.1:8000/api/acceptCallwash";
+        let dataJson = new FormData();
+        let data: Observable<any> = this.http.post(url, dataJson)
+        data.subscribe(res => {
+          if (res != null) {
+            this.status = res.status;
+            // console.log(this.resent);
+          }
+        });
       }
     });
   }
@@ -50,6 +60,19 @@ export class HomePage implements AfterViewInit {
       }
     }
     this.router.navigate(['map-direction'], tidFromWashman);
+  }
+
+  takeOrder(tid) {
+    let url: string = "http://127.0.0.1:8000/api/takeOrder";
+    let dataJson = new FormData();
+    dataJson.append('tid', tid); // insert tid to wash
+    let data: Observable<any> = this.http.post(url, dataJson)
+    data.subscribe(res => {
+      if (res != null) {
+        console.log('Change status = 2');
+        this.router.navigateByUrl('home');
+      }
+    });
 
   }
 }

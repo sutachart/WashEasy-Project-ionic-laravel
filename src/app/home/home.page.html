@@ -36,4 +36,11 @@
     <ion-progress-bar value="0.25" buffer="0.5"></ion-progress-bar>
   </ion-card>
 
+  <ion-card *ngIf="status==2" style="border: solid royalblue 0.5px;">
+    <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">Wash-man รับผ้าแล้ว
+    </ion-card-header>
+    <ion-card-content class="ion-text-center">จะนำพามาส่งก่อนเวลา 19:00 น.</ion-card-content>
+    <ion-progress-bar value="0.75" buffer="0.5"></ion-progress-bar>
+  </ion-card>
+
 </ion-content>

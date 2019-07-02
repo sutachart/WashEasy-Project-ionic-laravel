@@ -12,7 +12,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CancellationPage implements OnInit {
 
-  userid: any;
+  tid: any;
+  comment: any;
 
   constructor(
     private nav: NavParams,
@@ -22,7 +23,7 @@ export class CancellationPage implements OnInit {
     public modalController: ModalController) { }
 
   ngOnInit() {
-    this.userid = this.nav.data.user_id
+    this.tid = this.nav.data.tid
   }
 
   cancel() {
@@ -32,15 +33,16 @@ export class CancellationPage implements OnInit {
   confirm() {
     let url: string = "http://127.0.0.1:8000/api/cancelRequest";
     let dataJson = new FormData();
-    dataJson.append('tid', this.userid); // insert tid to wash
+    dataJson.append('tid', this.tid); // update tid = C : Cancel
+    dataJson.append('cancellation', this.comment); // insert comment cancel to transaction
     let data: Observable<any> = this.http.post(url, dataJson)
     data.subscribe(res => {
       if (res != null) {
         console.log('Change status = C');
+        this.router.navigateByUrl('home');
       }
     });
     this.modalController.dismiss();
-
   }
 
 

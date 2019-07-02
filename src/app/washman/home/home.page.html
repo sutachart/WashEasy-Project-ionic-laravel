@@ -17,11 +17,6 @@
 
   <ion-card>
     <ion-card-content>
-      <!-- <ion-item lines="none" *ngFor="let order of orders">
-        <ion-row (click)="acceptOrder(order.id)">
-          <ion-label>{{order.name}}</ion-label>
-        </ion-row>
-      </ion-item> -->
       <ion-item *ngFor="let res of resent">
         <ion-row>
           <ion-label>{{res.user_id}}&nbsp;</ion-label>
@@ -29,6 +24,26 @@
         </ion-row>
         <ion-row style="float: right;">
           <ion-button style="float: right;" (click)="fetchAddress(res.tid)">รับคำร้อง</ion-button>
+        </ion-row>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <h4 class="ion-text-center" style="color: black;">
+      Order ที่รับผ้าแล้ว
+    </h4>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item *ngFor="let res of status">
+        <ion-row>
+          <ion-label>{{res.user_id}}&nbsp;</ion-label>
+          <ion-label>{{res.user_address}}</ion-label>
+        </ion-row>
+        <ion-row style="float: right;">
+          <ion-button style="float: right;" (click)="takeOrder(res.tid)">รับแล้ว</ion-button>
         </ion-row>
       </ion-item>
     </ion-card-content>

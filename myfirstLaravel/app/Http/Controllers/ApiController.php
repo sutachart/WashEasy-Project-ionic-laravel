@@ -70,6 +70,15 @@ class ApiController extends Controller
     return response()->json(['status' => $result]);
     }
 
+    public function acceptCallwash(){
+        $result = DB::table('transaction')
+            ->select('transaction.status','user.user_id','user.user_address','user.tid')
+            ->join('user','user.tid','=','transaction.tran_id')
+            ->where('status','=','1')
+            ->get();
+    return response()->json(['status' => $result]);
+    }
+
     public function insertTidWashman(Request $request){
         $tid = $request['tid'];
         $result = DB::table('washman')->insert([
@@ -96,11 +105,30 @@ class ApiController extends Controller
     return response()->json(['success']);   
     }
 
-    public function cancelRequest(Request $request){
+    public function takeOrder(Request $request){
         $tid = $request['tid'];
         $result = DB::table('transaction')
             ->where('tran_id','=',$tid)
-            ->update(array('status' => 'C'));
+            ->update(array('status' => 2));
+
+    return response()->json(['success']);   
+    }
+
+    public function sendOrder(){
+        $result = DB::table('transaction')
+            ->select('transaction.status','user.user_id','user.user_address','user.tid')
+            ->join('user','user.tid','=','transaction.tran_id')
+            ->where('status','=','2')
+            ->get();
+    return response()->json(['status' => $result]);
+    }
+
+    public function cancelRequest(Request $request){
+        $tid = $request['tid'];
+        $cancellation = $request['cancellation'];
+        $result = DB::table('transaction')
+            ->where('tran_id','=',$tid)
+            ->update(array('status' => 'C','cancellation' => $cancellation));
 
     return response()->json(['Cancel complete']);   
     }

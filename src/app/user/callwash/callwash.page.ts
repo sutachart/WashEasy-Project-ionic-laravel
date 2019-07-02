@@ -79,7 +79,7 @@ export class CallwashPage {
   }
 
   reLoad() {
-    console.log(this.db.getDeveloper(this.dataReturned));
+    // console.log(this.db.getDeveloper(this.dataReturned));
   }
 
   booleanChange() {
@@ -134,7 +134,7 @@ export class CallwashPage {
             let data: Observable<any> = this.http.post(url, dataJson);
             data.subscribe(res => {
               if (res != null) {
-                console.log(JSON.stringify(res.transaction[0].tran_id));
+                // console.log(JSON.stringify(res.transaction[0].tran_id));
                 this.status = res.transaction[0].tran_id;
 
                 // Api & Params

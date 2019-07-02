@@ -15,8 +15,8 @@ export class HomePage implements AfterViewInit {
   dataReturned: any;
   // Params from callwash
   status: any = 0;
-  // Get user_id
-  userid:any;
+  // Get tid from user
+  tid: any;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -43,17 +43,17 @@ export class HomePage implements AfterViewInit {
     data.subscribe(res => {
       if (res != null) {
         this.status = res.status[0].status;
-        this.userid = res.status[0].user_id;
-        // console.log(res.status[0].user_id);
+        this.tid = res.status[0].tid;
       }
     });
+  }
 
-  } async cancelCall() {
+  async cancelCall() {
     const modal = await this.modalController.create({
       component: CancellationPage,
       componentProps: {
         // "paramID": 123,
-        "user_id": this.userid
+        "tid": this.tid
       },
       cssClass: 'cancelation-modal-css'
     });
