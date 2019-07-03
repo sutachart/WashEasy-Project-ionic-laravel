@@ -28,6 +28,7 @@ Route::post('acceptRequest',array('middleware' => 'cors','uses' => 'ApiControlle
 Route::post('cancelRequest',array('middleware' => 'cors','uses' => 'ApiController@cancelRequest'));
 Route::post('takeOrder',array('middleware' => 'cors','uses' => 'ApiController@takeOrder'));
 Route::post('sendOrder',array('middleware' => 'cors','uses' => 'ApiController@sendOrder'));
+Route::post('getDetail',array('middleware' => 'cors','uses' => 'ApiController@getDetail'));
 
 
 

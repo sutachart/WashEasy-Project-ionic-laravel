@@ -18,7 +18,8 @@ export class HomePage implements AfterViewInit {
   // Get tid from user
   tid: any;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     public navHttp: Http,
     public http: HttpClient,
@@ -38,7 +39,6 @@ export class HomePage implements AfterViewInit {
   ngAfterViewInit() {
     let url: string = "http://127.0.0.1:8000/api/checkStatus";
     let dataJson = new FormData();
-
     let data: Observable<any> = this.http.post(url, dataJson)
     data.subscribe(res => {
       if (res != null) {

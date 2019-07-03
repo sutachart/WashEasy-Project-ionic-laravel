@@ -132,4 +132,15 @@ class ApiController extends Controller
 
     return response()->json(['Cancel complete']);   
     }
+
+    public function getDetail(Request $request){
+        $tid = $request['tid'];
+        $result = DB::table('user')
+            ->select('user.tid','user.user_id','user.user_address')
+            ->join('transaction','user.tid','=','transaction.tran_id')
+            ->where('user.tid','=',$tid)
+            ->get();
+    return response()->json(['status' => $result]);
+    }
+
 }

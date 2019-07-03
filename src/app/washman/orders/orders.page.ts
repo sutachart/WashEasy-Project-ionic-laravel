@@ -1,6 +1,6 @@
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Component, } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
@@ -28,9 +28,17 @@ export class OrdersPage {
     data.subscribe(res => {
       if (res != null) {
         this.order = res.status;
-        console.log(res.status[0]);
+        // console.log(this.order)
       }
     });
   }
 
+  getDetail(tid) {
+    let statusHome: NavigationExtras = {
+      state: {
+        tid: tid
+      }
+    }
+    this.router.navigate(['order-detail'], statusHome);
+  }
 }
