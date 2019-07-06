@@ -17,6 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+Route::get('test',array('middleware' => 'cors','uses' => 'ApiController@test'));
+Route::get('loginWashman',array('middleware' => 'cors','uses' => 'ApiController@loginWashman'));
+
 Route::post('getAddress',array('middleware' => 'cors','uses' => 'ApiController@getAddress'));
 Route::post('insertUser',array('middleware' => 'cors','uses' => 'ApiController@insertUser'));
 Route::post('updateTransaction',array('middleware' => 'cors','uses' => 'ApiController@updateTransaction'));
@@ -29,6 +33,9 @@ Route::post('cancelRequest',array('middleware' => 'cors','uses' => 'ApiControlle
 Route::post('takeOrder',array('middleware' => 'cors','uses' => 'ApiController@takeOrder'));
 Route::post('sendOrder',array('middleware' => 'cors','uses' => 'ApiController@sendOrder'));
 Route::post('getDetail',array('middleware' => 'cors','uses' => 'ApiController@getDetail'));
-
+Route::post('sentOrder',array('middleware' => 'cors','uses' => 'ApiController@sentOrder'));
+Route::post('getAddressOrder',array('middleware' => 'cors','uses' => 'ApiController@getAddressOrder'));
+Route::post('showOrderMap',array('middleware' => 'cors','uses' => 'ApiController@showOrderMap'));
+Route::post('sentOrderFinish',array('middleware' => 'cors','uses' => 'ApiController@sentOrderFinish'));
 
 

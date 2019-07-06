@@ -9,12 +9,11 @@ import { ModalController } from '@ionic/angular';
 declare var google;
 
 @Component({
-  selector: 'app-map-direction',
-  templateUrl: './map-direction.page.html',
-  styleUrls: ['./map-direction.page.scss'],
+  selector: 'app-map-direction-order',
+  templateUrl: './map-direction-order.page.html',
+  styleUrls: ['./map-direction-order.page.scss'],
 })
-export class MapDirectionPage implements AfterViewInit {
-
+export class MapDirectionOrderPage {
   Destination: any;
   MyLocation: any;
 
@@ -36,7 +35,7 @@ export class MapDirectionPage implements AfterViewInit {
     private route: ActivatedRoute,
     public modalController: ModalController) {
 
-    // Receive params from callwash
+    // Receive params from order details
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.tid = this.router.getCurrentNavigation().extras.state.tid;
@@ -56,7 +55,7 @@ export class MapDirectionPage implements AfterViewInit {
     const map = new google.maps.Map(document.getElementById('map'), options);
     directionsDisplay.setMap(map);
 
-    let url: string = "http://127.0.0.1:8000/api/getAddress";
+    let url: string = "http://127.0.0.1:8000/api/getAddressOrder";
     let dataJson = new FormData();
     dataJson.append('tid', this.tid); // insert tid to wash
     let data: Observable<any> = this.http.post(url, dataJson)
@@ -79,8 +78,8 @@ export class MapDirectionPage implements AfterViewInit {
   // Alert Accept
   async acceptAlert() {
     const alert = await this.alertController.create({
-      header: 'ยืนยันคำร้อง',
-      message: '<br>ชื่อ : ' + this.username + '<br>บริการ : ' + this.service + '<br>ราคา : ' + this.price + ' บาท',
+      header: 'ยืนยันการส่งผ้า',
+      message: '',
       buttons: [
         {
           text: 'ยกเลิก',
@@ -90,15 +89,14 @@ export class MapDirectionPage implements AfterViewInit {
           text: 'ตกลง',
           role: 'confirm',
           handler: () => {
-            let url: string = "http://127.0.0.1:8000/api/acceptRequest";
+            let url: string = "http://127.0.0.1:8000/api/sentOrderFinish";
             let dataJson = new FormData();
             dataJson.append('tid', this.tid); // insert tid to wash
-            // dataJson.append('status', '1'); // update status = 1
             let data: Observable<any> = this.http.post(url, dataJson)
             data.subscribe(res => {
               if (res != null) {
-                console.log('Change status = 1');
-                this.router.navigateByUrl('home');
+                console.log('Change status = 4 Finish');
+                this.router.navigateByUrl('orders');
               }
             });
           }
@@ -158,7 +156,7 @@ export class MapDirectionPage implements AfterViewInit {
       // Display the duration
       let duraInt = Math.floor(((response.routes[0].legs[0].duration.value) / 60));
       let duraFloat = Math.floor(((response.routes[0].legs[0].duration.value) % 60));
-      console.log(duraInt + '.' + duraFloat);
+      // console.log(duraInt + '.' + duraFloat);
       // document.getElementById('duration').innerHTML = +duraInt + '.' + duraFloat + " นาที";
 
       // Display the distance
@@ -170,19 +168,5 @@ export class MapDirectionPage implements AfterViewInit {
         window.alert('Directions request failed due to ' + status);
       }
     });
-  }
-
-  // Cancel
-  async cancelCall() {
-    const modal = await this.modalController.create({
-      component: WashCancelPage,
-      componentProps: {
-        // "paramID": 123,
-        "tid": this.tid
-      },
-      cssClass: 'cancelation-modal-css'
-    });
-    return await modal.present();
-    // this.status = null;
   }
 }

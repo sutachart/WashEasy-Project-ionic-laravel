@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class OrdersPage {
 
   public order = [];
+  public final = [];
 
   constructor(
     private router: Router,
@@ -28,7 +29,15 @@ export class OrdersPage {
     data.subscribe(res => {
       if (res != null) {
         this.order = res.status;
-        // console.log(this.order)
+
+        let url: string = "http://127.0.0.1:8000/api/showOrderMap";
+        let dataJson = new FormData();
+        let data: Observable<any> = this.http.post(url, dataJson)
+        data.subscribe(res => {
+          if (res != null) {
+            this.final = res.status;
+          }
+        });
       }
     });
   }
@@ -40,5 +49,14 @@ export class OrdersPage {
       }
     }
     this.router.navigate(['order-detail'], statusHome);
+  }
+
+  OrderFinal(tid){
+    let statusHome: NavigationExtras = {
+      state: {
+        tid: tid
+      }
+    }
+    this.router.navigate(['map-direction-order'], statusHome);
   }
 }

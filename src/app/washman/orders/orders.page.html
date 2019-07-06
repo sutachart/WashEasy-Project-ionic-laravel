@@ -16,6 +16,7 @@
   <ion-card>
     <ion-card-content>
       <ion-list>
+        <ion-item *ngIf="order.length==0" lines="none">ไม่มี Order</ion-item>
         <ion-item *ngFor="let res of order">
           <ion-row>
             <ion-label>Order {{res.user_id}}&nbsp;</ion-label>
@@ -23,6 +24,29 @@
           </ion-row>
           <ion-row style="float: right;">
             <ion-button style="float: right;" (click)="getDetail(res.tid)">ดูรายละเอียด</ion-button>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <h4 class="ion-text-center" style="color: black;">
+      Order ที่รับแล้ว รอส่ง
+    </h4>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngIf="final.length==0" lines="none">ไม่มี Order</ion-item>
+        <ion-item *ngFor="let res of final">
+          <ion-row>
+            <ion-label>Order {{res.tid}}&nbsp;</ion-label>
+            <!-- <ion-label>{{res.user_address}}</ion-label> -->
+          </ion-row>
+          <ion-row style="float: right;">
+            <ion-button style="float: right;" (click)="OrderFinal(res.tid)">ดูแผนที่</ion-button>
           </ion-row>
         </ion-item>
       </ion-list>

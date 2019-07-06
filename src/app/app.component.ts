@@ -26,14 +26,14 @@ export class AppComponent {
       icon: 'person'
     },
     {
-      title: 'Login',
-      url: '/login',
-      icon: 'contact'
-    },
-    {
       title: 'Orders',
       url: '/orders',
       icon: 'contact'
+    },
+    {
+      title: 'Login',
+      url: '/login',
+      icon: 'checkmark-circle'
     }
   ];
 

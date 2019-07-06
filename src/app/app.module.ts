@@ -1,3 +1,4 @@
+import { WashCancelPageModule } from './washman/wash-cancel/wash-cancel.module';
 import { CancellationPageModule } from './user/cancellation/cancellation.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,6 +33,7 @@ import { IonicRatingModule } from 'ionic4-rating';
     HttpClientModule,
     LocationListPageModule,
     CancellationPageModule,
+    WashCancelPageModule,
     IonicRatingModule,
     IonicModule.forRoot()
   ],

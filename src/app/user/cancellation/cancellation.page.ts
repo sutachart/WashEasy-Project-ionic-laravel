@@ -35,6 +35,7 @@ export class CancellationPage implements OnInit {
     let dataJson = new FormData();
     dataJson.append('tid', this.tid); // update tid = C : Cancel
     dataJson.append('cancellation', this.comment); // insert comment cancel to transaction
+    // dataJson.append('status', 'C'); // update status = C
     let data: Observable<any> = this.http.post(url, dataJson)
     data.subscribe(res => {
       if (res != null) {

@@ -7,15 +7,15 @@ use DB;
 
 class ApiController extends Controller
 {
-    // function test(){
-    // 	$firebase = new \Geckob\Firebase\Firebase('../apiFirebase.json');
-    // 	$temp = [];
-    // 	$temp = $firebase->get('/getData');
+    function test(){
+    	$firebase = new \Geckob\Firebase\Firebase('../apiFirebase.json');
+    	$temp = [];
+    	$temp = $firebase->get('/getData');
 
-    //         return response()->json(['status' => '1',
-    //             'message' => 'Gotcha!!!',
-    //             'data' => $temp], 200);
-    // }
+            return response()->json(['status' => $temp,
+                'message' => 'Gotcha!!!',
+                'data' => $temp], 200);
+    }
 
     public function insertUser(Request $request){
         $user_address = $request['order_address'];
@@ -51,7 +51,7 @@ class ApiController extends Controller
     }
 
     public function checkStatus(){
-        $user_id = 13;
+        $user_id = 25;
         $result = DB::table('transaction')
             ->select('transaction.status','user.tid','user.user_id')
             ->join('user','user.tid','=','transaction.tran_id')
@@ -143,4 +143,49 @@ class ApiController extends Controller
     return response()->json(['status' => $result]);
     }
 
+    public function sentOrder(Request $request){
+        $tid = $request['tid'];
+        $result = DB::table('transaction')
+            ->where('tran_id','=',$tid)
+            ->update(array('status' => 3));
+
+    return response()->json(['success']);   
+    }
+
+     public function sentOrderFinish(Request $request){
+        $tid = $request['tid'];
+        $result = DB::table('transaction')
+            ->where('tran_id','=',$tid)
+            ->update(array('status' => 4));
+
+    return response()->json(['success']);   
+    }
+
+    public function getAddressOrder(Request $request){
+        $tid = $request['tid'];
+        $result = DB::table('user')
+            ->select('user.user_service','user.user_price','user.user_address','user.user_latitude','user.user_longtitude','user.user_id')
+            ->join('transaction','user.tid','=','transaction.tran_id')
+            ->where('user.tid','=', $tid)
+            ->where('transaction.status','=',3)
+            ->get();
+    return response()->json(['status' => $result]);   
+    }
+
+    public function showOrderMap(){
+        $result = DB::table('transaction')
+            ->select('user.user_address','user.user_service','user.tid')
+            ->join('user','user.tid','=','transaction.tran_id')
+            ->where('status','=','3')
+            ->get();
+    return response()->json(['status' => $result]);
+    }
+
+    public  function loginWashman(Request $request){
+        $username = $request['username'];
+        $password = $request['password'];
+         $result = DB::table('account')
+            ->select('username','password')
+            ->get();
+    }
 }

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class OrderDetailPage {
     private router: Router,
     private route: ActivatedRoute,
     public navHttp: Http,
-    public http: HttpClient) {
+    public http: HttpClient,
+    private alertController: AlertController) {
 
     // Receive params from order page
     this.route.queryParams.subscribe(params => {
@@ -41,7 +43,7 @@ export class OrderDetailPage {
     let data: Observable<any> = this.http.post(url, dataJson)
     data.subscribe(res => {
       if (res != null) {
-        console.log(res);
+        // console.debug(res);
         this.userid = res.status[0].user_id;
         this.tel = '0868750608';
         this.address = res.status[0].user_address;
@@ -49,4 +51,35 @@ export class OrderDetailPage {
     });
   }
 
+  // Alert Order Accept
+  async alertOrder() {
+    const alert = await this.alertController.create({
+      header: 'ยืนยันการส่งผ้า',
+      // message:
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'confirm'
+        },
+        {
+          text: 'ตกลง',
+          role: 'confirm',
+          handler: () => {
+            let url: string = "http://127.0.0.1:8000/api/sentOrder";
+            let dataJson = new FormData();
+            dataJson.append('tid', this.tid); // insert tid to wash
+            // dataJson.append('status', '3'); // update Status = 3
+            let data: Observable<any> = this.http.post(url, dataJson)
+            data.subscribe(res => {
+              if (res != null) {
+                console.log('Change status = 3');
+                this.router.navigateByUrl('orders');
+              }
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }

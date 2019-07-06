@@ -1,3 +1,4 @@
+import { WashCancelPage } from './../wash-cancel/wash-cancel.page';
 import { Component, AfterViewInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
@@ -78,6 +79,7 @@ export class HomePage implements AfterViewInit {
             let url: string = "http://127.0.0.1:8000/api/takeOrder";
             let dataJson = new FormData();
             dataJson.append('tid', tid); // insert tid to wash
+            // dataJson.append('status', '2'); // update status = 2
             let data: Observable<any> = this.http.post(url, dataJson)
             data.subscribe(res => {
               if (res != null) {

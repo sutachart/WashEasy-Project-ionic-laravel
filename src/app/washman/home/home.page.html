@@ -17,10 +17,11 @@
 
   <ion-card>
     <ion-card-content>
+      <ion-item *ngIf="resent.length==0" lines="none">ไม่มี Order</ion-item>
       <ion-item *ngFor="let res of resent">
         <ion-row>
-          <ion-label>{{res.user_id}}&nbsp;</ion-label>
-          <ion-label>{{res.user_address}}</ion-label>
+          <ion-label>Order : {{res.tid}}&nbsp;</ion-label>
+          <!-- <ion-label>{{res.user_address}}</ion-label> -->
         </ion-row>
         <ion-row style="float: right;">
           <ion-button style="float: right;" (click)="fetchAddress(res.tid)">รับคำร้อง</ion-button>
@@ -37,10 +38,11 @@
 
   <ion-card>
     <ion-card-content>
+      <ion-item *ngIf="status.length==0" lines="none">ไม่มี Order</ion-item>
       <ion-item *ngFor="let res of status">
         <ion-row>
-          <ion-label>{{res.user_id}}&nbsp;</ion-label>
-          <ion-label>{{res.user_address}}</ion-label>
+          <ion-label>Order : {{res.tid}}&nbsp;</ion-label>
+          <!-- <ion-label>{{res.user_address}}</ion-label> -->
         </ion-row>
         <ion-row style="float: right;">
           <ion-button style="float: right;" (click)="takeOrder(res.tid)">รับแล้ว</ion-button>
