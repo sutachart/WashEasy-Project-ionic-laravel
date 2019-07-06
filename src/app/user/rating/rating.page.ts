@@ -6,14 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rating.page.scss'],
 })
 export class RatingPage implements OnInit {
-  rate : any;
+  comment: string;
+  rate: any;
+
   constructor() { }
 
   ngOnInit() {
   }
 
   onRateChange(event) {
-    console.log('Your rate:', event);
+    this.rate = event;
+
+    console.log('Your rate:', this.rate);
+  }
+
+  sendFeedBack() {
+    console.log(this.rate);
+    console.log(this.comment);
   }
 
 }
