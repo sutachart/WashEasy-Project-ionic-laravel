@@ -12,11 +12,12 @@
     <ion-card-content style="padding: 0px">
       <ion-item style="padding: 0px" lines="none">
         <ion-label position="stacked">ให้คะแนนเรา</ion-label>
-        <rating style="padding: 0px" [rate]="rate" readonly="false" size="default" (rateChange)="onRateChange($event)">
+        <rating style="padding: 0px"  [(ngModel)]="rate" [rate]="rate" readonly="false" size="default" (rateChange)="onRateChange($event)">
         </rating>
-        <ion-textarea class="input-text" placeholder="ให้คำแนะนำเรา"></ion-textarea>
+        <ion-textarea class="input-text" [(ngModel)]="comment" placeholder="ให้คำแนะนำเรา"></ion-textarea>
       </ion-item>
-      <ion-button color="secondary" expand="block">ส่ง</ion-button>
+      <ion-button *ngIf="comment==null||rate==null" disabled="true" shape="round" color="medium" expand="block">ส่ง</ion-button>
+      <ion-button *ngIf="comment!=null&&rate!=null" shape="round" color="secondary" expand="block" (click)="sendFeedBack()">ส่ง</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
