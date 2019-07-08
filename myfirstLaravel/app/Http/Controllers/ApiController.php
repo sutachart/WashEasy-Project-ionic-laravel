@@ -51,7 +51,7 @@ class ApiController extends Controller
     }
 
     public function checkStatus(){
-        $user_id = 25;
+        $user_id = 30;
         $result = DB::table('transaction')
             ->select('transaction.status','user.tid','user.user_id')
             ->join('user','user.tid','=','transaction.tran_id')
@@ -158,6 +158,8 @@ class ApiController extends Controller
             ->where('tran_id','=',$tid)
             ->update(array('status' => 4));
 
+        $feedback = DB::table('feedback')
+            ->insert(['tid' => $tid]);
     return response()->json(['success']);   
     }
 
@@ -191,9 +193,17 @@ class ApiController extends Controller
 
     public function updateRating(Request $request){
         $tid = $request['tid'];
+        $score = $request['score'];
+        $comment = $request['comment'];
+
         $result = DB::table('transaction')
             ->where('tran_id','=',$tid)
             ->update(array('status' => 5));
+
+        $feedback = DB::table('feedback')
+            ->join('transaction','transaction.tran_id','=','feedback.tid')
+            ->where('feedback.tid','=',$tid)
+            ->update(array('score' => $score,'comment' => $comment));
 
     return response()->json(['success']);   
     }

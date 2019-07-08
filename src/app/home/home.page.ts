@@ -56,16 +56,18 @@ export class HomePage implements AfterViewInit {
     this.rate = event;
     console.log('Your rate:', this.rate);
   }
+
   sendFeedBack() {
-    // console.log(this.rate);
-    // console.log(this.comment);
     let url: string = "http://127.0.0.1:8000/api/updateRating";
     let dataJson = new FormData();
-    dataJson.append('tid', this.tid); // status
+    dataJson.append('tid', this.tid); // 
+    dataJson.append('score', this.rate); // status
+    dataJson.append('comment', this.comment); // status
     let data: Observable<any> = this.http.post(url, dataJson)
     data.subscribe(res => {
       if (res != null) {
-        console.log(res)
+        // console.log(res)
+
         let url: string = "http://127.0.0.1:8000/api/checkStatus";
         let dataJson = new FormData();
         let data: Observable<any> = this.http.post(url, dataJson)
