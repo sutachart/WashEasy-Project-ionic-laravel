@@ -188,4 +188,13 @@ class ApiController extends Controller
             ->select('username','password')
             ->get();
     }
+
+    public function updateRating(Request $request){
+        $tid = $request['tid'];
+        $result = DB::table('transaction')
+            ->where('tran_id','=',$tid)
+            ->update(array('status' => 5));
+
+    return response()->json(['success']);   
+    }
 }

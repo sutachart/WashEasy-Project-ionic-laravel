@@ -114,10 +114,10 @@ export class MapDirectionOrderPage {
     // Map Center
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
-      center: {
-        lat: 16.458651,
-        lng: 102.827978
-      }
+      // center: {
+      //   lat: 16.458651,
+      //   lng: 102.827978
+      // }
     });
     directionsDisplay.setMap(map);
 

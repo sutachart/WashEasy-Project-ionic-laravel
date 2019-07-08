@@ -18,6 +18,9 @@ export class HomePage implements AfterViewInit {
   // Get tid from user
   tid: any;
 
+  comment: string;
+  rate: any;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -44,6 +47,33 @@ export class HomePage implements AfterViewInit {
       if (res != null) {
         this.status = res.status[0].status;
         this.tid = res.status[0].tid;
+      }
+    });
+  }
+
+  // Rating
+  onRateChange(event) {
+    this.rate = event;
+    console.log('Your rate:', this.rate);
+  }
+  sendFeedBack() {
+    // console.log(this.rate);
+    // console.log(this.comment);
+    let url: string = "http://127.0.0.1:8000/api/updateRating";
+    let dataJson = new FormData();
+    dataJson.append('tid', this.tid); // status
+    let data: Observable<any> = this.http.post(url, dataJson)
+    data.subscribe(res => {
+      if (res != null) {
+        console.log(res)
+        let url: string = "http://127.0.0.1:8000/api/checkStatus";
+        let dataJson = new FormData();
+        let data: Observable<any> = this.http.post(url, dataJson)
+        data.subscribe(res => {
+          if (res != null) {
+            
+          }
+        });
       }
     });
   }

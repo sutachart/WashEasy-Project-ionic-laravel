@@ -37,5 +37,6 @@ Route::post('sentOrder',array('middleware' => 'cors','uses' => 'ApiController@se
 Route::post('getAddressOrder',array('middleware' => 'cors','uses' => 'ApiController@getAddressOrder'));
 Route::post('showOrderMap',array('middleware' => 'cors','uses' => 'ApiController@showOrderMap'));
 Route::post('sentOrderFinish',array('middleware' => 'cors','uses' => 'ApiController@sentOrderFinish'));
+Route::post('updateRating',array('middleware' => 'cors','uses' => 'ApiController@updateRating'));
 
 

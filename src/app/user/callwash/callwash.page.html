@@ -77,7 +77,8 @@
 <!-- Footer  -->
 <ion-footer>
   <ion-toolbar class="ion-text-center">
-    <ion-button (click)="presentAlert()">ยืนยัน</ion-button>
+    <ion-button *ngIf="price==null" disabled="true" shape="round" color="medium" expand="block">ยืนยัน</ion-button>
+    <ion-button *ngIf="price!=null" shape="round" color="primary" expand="block" (click)="presentAlert()">ยืนยัน</ion-button>
   </ion-toolbar>
 </ion-footer>
 <!-- /Footer -->
