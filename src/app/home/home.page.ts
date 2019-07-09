@@ -1,6 +1,6 @@
 import { CancellationPage } from './../user/cancellation/cancellation.page';
 import { Component, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -12,12 +12,14 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements AfterViewInit {
+
   dataReturned: any;
   // Params from callwash
-  status: any = 0;
+  status: any;
   // Get tid from user
   tid: any;
 
+  // Param rating feedback table
   comment: string;
   rate: any;
 
@@ -28,17 +30,9 @@ export class HomePage implements AfterViewInit {
     public http: HttpClient,
     public modalController: ModalController) {
 
-    // Receive params from callwash
-    // this.route.queryParams.subscribe(params => {
-    //   if (this.router.getCurrentNavigation().extras.state) {
-    //     this.status = this.router.getCurrentNavigation().extras.state.status;
-    //   }
-    //   // console.log('Home',this.status);
-    // });
   }
 
-
-
+  // Show status on feed homepage where user_id
   ngAfterViewInit() {
     let url: string = "http://127.0.0.1:8000/api/checkStatus";
     let dataJson = new FormData();
@@ -57,6 +51,7 @@ export class HomePage implements AfterViewInit {
     console.log('Your rate:', this.rate);
   }
 
+  // Update feedback table
   sendFeedBack() {
     let url: string = "http://127.0.0.1:8000/api/updateRating";
     let dataJson = new FormData();
@@ -67,29 +62,28 @@ export class HomePage implements AfterViewInit {
     data.subscribe(res => {
       if (res != null) {
         // console.log(res)
-
         let url: string = "http://127.0.0.1:8000/api/checkStatus";
         let dataJson = new FormData();
         let data: Observable<any> = this.http.post(url, dataJson)
         data.subscribe(res => {
           if (res != null) {
-            
+
           }
         });
       }
     });
   }
 
+  // Cancel order by User where status = 0
   async cancelCall() {
+    // Open modal cancellation & send param tid
     const modal = await this.modalController.create({
       component: CancellationPage,
       componentProps: {
-        // "paramID": 123,
         "tid": this.tid
       },
       cssClass: 'cancelation-modal-css'
     });
     return await modal.present();
-    // this.status = null;
   }
 }

@@ -34,11 +34,6 @@ export class AppComponent {
       title: 'Login',
       url: '/login',
       icon: 'checkmark-circle'
-    },
-    {
-      title: 'Feed-back',
-      url: '/rating',
-      icon: 'star-half'
     }
   ];
 

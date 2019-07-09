@@ -1,5 +1,4 @@
-import { WashCancelPage } from './../wash-cancel/wash-cancel.page';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -14,12 +13,12 @@ declare var google;
   styleUrls: ['./map-direction-order.page.scss'],
 })
 export class MapDirectionOrderPage {
+
+  // Start and End direction
   Destination: any;
   MyLocation: any;
 
   // Params Destination
-  // latt = 16.458651;
-  // long = 102.827978;
   latt: any;
   long: any;
   tid: any;
@@ -35,7 +34,7 @@ export class MapDirectionOrderPage {
     private route: ActivatedRoute,
     public modalController: ModalController) {
 
-    // Receive params from order details
+    // Receive params from orders
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.tid = this.router.getCurrentNavigation().extras.state.tid;
@@ -44,6 +43,8 @@ export class MapDirectionOrderPage {
   }
 
   ngAfterViewInit(): void {
+
+    // Setting Map
     let directionsDisplay = new google.maps.DirectionsRenderer;
     const options = {
       zoom: 15,
@@ -55,6 +56,7 @@ export class MapDirectionOrderPage {
     const map = new google.maps.Map(document.getElementById('map'), options);
     directionsDisplay.setMap(map);
 
+    // Api get Address where tid
     let url: string = "http://127.0.0.1:8000/api/getAddressOrder";
     let dataJson = new FormData();
     dataJson.append('tid', this.tid); // insert tid to wash
@@ -89,6 +91,7 @@ export class MapDirectionOrderPage {
           text: 'ตกลง',
           role: 'confirm',
           handler: () => {
+            // Api update status = 4 & insert tid to feedback table
             let url: string = "http://127.0.0.1:8000/api/sentOrderFinish";
             let dataJson = new FormData();
             dataJson.append('tid', this.tid); // insert tid to wash
@@ -106,36 +109,29 @@ export class MapDirectionOrderPage {
     await alert.present();
   }
 
-  // Fuction Route
+  // Fuction Route direction
   calculateAndDisplayRoute() {
     let that = this;
     let directionsService = new google.maps.DirectionsService;
     let directionsDisplay = new google.maps.DirectionsRenderer;
     // Map Center
-    const map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      // center: {
-      //   lat: 16.458651,
-      //   lng: 102.827978
-      // }
-    });
+    const map = new google.maps.Map(document.getElementById('map'), { zoom: 15 });
     directionsDisplay.setMap(map);
 
     if (navigator.geolocation) {
-      // Current Location
+      // Get Current Location
       navigator.geolocation.getCurrentPosition(function (position) {
         var pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
         map.setCenter(pos);
+        // Set lat,long to Mylocation Param
         that.MyLocation = new google.maps.LatLng(pos);
       });
-    } else {
-      // Browser doesn't support Geolocation
-    }
+    } else { }
 
-    // Lat long Destination
+    // Set Lat,long Destination
     var pos_des = {
       lat: this.latt,
       lng: this.long
@@ -144,7 +140,7 @@ export class MapDirectionOrderPage {
 
     // // Distance between 2 direction
     let distance = (google.maps.geometry.spherical.computeDistanceBetween(this.MyLocation, this.Destination) / 1000).toFixed(2);
-    // console.log('Distance :', distance, ' Kilometer');
+    console.log('Distance :', distance, ' Kilometer');
 
     // Route direction
     directionsService.route({
