@@ -19,8 +19,8 @@ export class MapDirectionPage implements AfterViewInit {
   Destination: any;
   MyLocation: any;
 
-  latitude: any;
-  longtitude: any;
+  latitude: any = 16.458651;
+  longtitude: any = 102.827978;
 
   // Params Destination
   latt: any;
@@ -80,8 +80,6 @@ export class MapDirectionPage implements AfterViewInit {
     };
     const map = new google.maps.Map(document.getElementById('map'), options);
     directionsDisplay.setMap(map);
-
-    // var interval = setInterval(this.calculateAndDisplayRoute, 5000);
   }
 
   // Fuction Route
@@ -105,7 +103,6 @@ export class MapDirectionPage implements AfterViewInit {
       console.log('Error getting location', error);
     });
 
-    // Lat long Mylocation
     var pos = {
       lat: this.latitude,
       lng: this.longtitude
@@ -120,10 +117,6 @@ export class MapDirectionPage implements AfterViewInit {
     }
     this.Destination = new google.maps.LatLng(pos_des);
 
-    // // Distance between 2 direction
-    let distance = (google.maps.geometry.spherical.computeDistanceBetween(this.MyLocation, this.Destination) / 1000).toFixed(2);
-    console.log('Distance :', distance, ' Kilometer');
-
     // Route direction
     directionsService.route({
       origin: this.MyLocation,
@@ -134,7 +127,7 @@ export class MapDirectionPage implements AfterViewInit {
       // Display the duration time
       let duraInt = Math.floor(((response.routes[0].legs[0].duration.value) / 60));
       let duraFloat = Math.floor(((response.routes[0].legs[0].duration.value) % 60));
-      console.log(duraInt + '.' + duraFloat + ' นาที');
+      // console.log(duraInt + '.' + duraFloat + ' นาที');
       // document.getElementById('duration').innerHTML = +duraInt + '.' + duraFloat + " นาที";
 
       // Display the distance
@@ -147,10 +140,15 @@ export class MapDirectionPage implements AfterViewInit {
       //   window.alert('Directions request failed due to ' + status);
       // }
     });
+
+    // // Distance between 2 direction
+    let distance = (google.maps.geometry.spherical.computeDistanceBetween(this.MyLocation, this.Destination) / 1000).toFixed(2);
+    // console.log('Distance :', distance, ' Kilometer');
+    
   }
 
 
-  
+
   // Alert Accept
   async acceptAlert() {
     const alert = await this.alertController.create({

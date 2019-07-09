@@ -18,8 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('test',array('middleware' => 'cors','uses' => 'ApiController@test'));
+Route::post('getTimeFirebase',array('middleware' => 'cors','uses' => 'ApiController@getTimeFirebase'));
 Route::get('loginWashman',array('middleware' => 'cors','uses' => 'ApiController@loginWashman'));
+Route::get('updateTimeFirebase',array('middleware' => 'cors','uses' => 'ApiController@updateTimeFirebase'));
 
 Route::post('getAddress',array('middleware' => 'cors','uses' => 'ApiController@getAddress'));
 Route::post('insertUser',array('middleware' => 'cors','uses' => 'ApiController@insertUser'));

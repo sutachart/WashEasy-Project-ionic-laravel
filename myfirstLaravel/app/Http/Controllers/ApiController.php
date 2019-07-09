@@ -7,14 +7,20 @@ use DB;
 
 class ApiController extends Controller
 {
-    function test(){
+    public function getTimeFirebase(){
     	$firebase = new \Geckob\Firebase\Firebase('../apiFirebase.json');
-    	$temp = [];
-    	$temp = $firebase->get('/getData');
+        $temp = [];
+        $temp = $firebase->get('/setData');
 
-            return response()->json(['status' => $temp,
-                'message' => 'Gotcha!!!',
-                'data' => $temp], 200);
+        return response()->json(['time'=>$temp]);
+    }
+
+    public function updateTimeFirebase(Request $request){
+        $time = 10;
+        $firebase = new \Geckob\Firebase\Firebase('../apiFirebase.json');
+        $temp = [];
+        $temp = $firebase->set('/setData',$time);
+
     }
 
     public function insertUser(Request $request){
@@ -51,13 +57,14 @@ class ApiController extends Controller
     }
 
     public function checkStatus(){
-        $user_id = 30;
+        $user_id = 31;
         $result = DB::table('transaction')
             ->select('transaction.status','user.tid','user.user_id')
             ->join('user','user.tid','=','transaction.tran_id')
             ->where('user.user_id','=',$user_id)
             ->orderBy('tid', 'desc')
             ->get();
+
     return response()->json(['status' => $result]);
     }
 

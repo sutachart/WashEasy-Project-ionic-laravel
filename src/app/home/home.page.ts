@@ -23,6 +23,8 @@ export class HomePage implements AfterViewInit {
   comment: string;
   rate: any;
 
+  time: any;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -41,6 +43,17 @@ export class HomePage implements AfterViewInit {
       if (res != null) {
         this.status = res.status[0].status;
         this.tid = res.status[0].tid;
+        // Check status = 1 washman receive
+        if (this.status == 1) {
+          let url: string = "http://127.0.0.1:8000/api/getTimeFirebase"; // get time from firebase
+          let dataJson = new FormData();
+          let data: Observable<any> = this.http.post(url, dataJson)
+          data.subscribe(res => {
+            if (res != null) {
+              this.time = res.time;
+            }
+          });
+        }
       }
     });
   }
