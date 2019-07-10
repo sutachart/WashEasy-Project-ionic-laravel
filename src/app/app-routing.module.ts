@@ -56,7 +56,8 @@ const routes: Routes = [
     path: 'rating', loadChildren: './user/rating/rating.module#RatingPageModule'
   },
   { path: 'order-detail', loadChildren: './washman/order-detail/order-detail.module#OrderDetailPageModule' },
-  { path: 'map-direction-order', loadChildren: './washman/map-direction-order/map-direction-order.module#MapDirectionOrderPageModule' }
+  { path: 'map-direction-order', loadChildren: './washman/map-direction-order/map-direction-order.module#MapDirectionOrderPageModule' },
+  { path: 'home-detail', loadChildren: './washman/home-detail/home-detail.module#HomeDetailPageModule' }
 
 
   // { path: 'developers', loadChildren: './pages/developers/developers.module#DevelopersPageModule' },

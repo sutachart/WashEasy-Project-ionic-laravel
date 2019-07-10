@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MapDirectionOrderPage } from './map-direction-order.page';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { HomeDetailPage } from './home-detail.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MapDirectionOrderPage
+    component: HomeDetailPage
   }
 ];
 
@@ -22,7 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MapDirectionOrderPage],
-  providers: [Geolocation]
+  declarations: [HomeDetailPage]
 })
-export class MapDirectionOrderPageModule {}
+export class HomeDetailPageModule {}

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 declare var google;
 
 @Component({
@@ -17,6 +18,9 @@ export class MapDirectionOrderPage {
   // Start and End direction
   Destination: any;
   MyLocation: any;
+  
+  latitude: any = 16;
+  longtitude: any = 102;
 
   // Params Destination
   latt: any;
@@ -32,7 +36,8 @@ export class MapDirectionOrderPage {
     public navHttp: Http,
     public http: HttpClient,
     private route: ActivatedRoute,
-    public modalController: ModalController) {
+    public modalController: ModalController,
+    private geolocation: Geolocation) {
 
     // Receive params from orders
     this.route.queryParams.subscribe(params => {
@@ -118,18 +123,19 @@ export class MapDirectionOrderPage {
     const map = new google.maps.Map(document.getElementById('map'), { zoom: 15 });
     directionsDisplay.setMap(map);
 
-    if (navigator.geolocation) {
-      // Get Current Location
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        map.setCenter(pos);
-        // Set lat,long to Mylocation Param
-        that.MyLocation = new google.maps.LatLng(pos);
-      });
-    } else { }
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitude = resp.coords.latitude
+      this.longtitude = resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+    var pos = {
+      lat: this.latitude,
+      lng: this.longtitude
+    };
+    map.setCenter(pos);
+    this.MyLocation = new google.maps.LatLng(pos);
 
     // Set Lat,long Destination
     var pos_des = {
@@ -139,7 +145,7 @@ export class MapDirectionOrderPage {
     this.Destination = new google.maps.LatLng(pos_des);
 
     // // Distance between 2 direction
-    let distance = (google.maps.geometry.spherical.computeDistanceBetween(this.MyLocation, this.Destination) / 1000).toFixed(2);
+    let distance = (google.maps.geometry.spherical.computeDistanceBetween(this.MyLocation, this.Destination) / 1000).toFixed(3);
     console.log('Distance :', distance, ' Kilometer');
 
     // Route direction

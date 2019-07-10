@@ -19,8 +19,8 @@ export class MapDirectionPage implements AfterViewInit {
   Destination: any;
   MyLocation: any;
 
-  latitude: any = 16.458651;
-  longtitude: any = 102.827978;
+  latitude: any = 16;
+  longtitude: any = 102;
 
   // Params Destination
   latt: any;
@@ -32,6 +32,8 @@ export class MapDirectionPage implements AfterViewInit {
   username: any;
   service: any;
   price: any;
+
+  time: any;
 
   constructor(private alertController: AlertController,
     private router: Router,
@@ -51,6 +53,7 @@ export class MapDirectionPage implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
     // Get Address from database
     let url: string = "http://127.0.0.1:8000/api/getAddress";
     let dataJson = new FormData();
@@ -117,36 +120,36 @@ export class MapDirectionPage implements AfterViewInit {
     }
     this.Destination = new google.maps.LatLng(pos_des);
 
+    // let distance = (google.maps.geometry.spherical.computeDistanceBetween(this.MyLocation, this.Destination) / 1000).toFixed(2);
+    // console.log(distance);
+
+
     // Route direction
     directionsService.route({
       origin: this.MyLocation,
       destination: this.Destination,
-      travelMode: 'DRIVING'
-    }, function (response, status) {
+      travelMode: google.maps.TravelMode.DRIVING
+    },
+      function (response, status) {
+        if (status === 'OK') {
 
-      // Display the duration time
-      let duraInt = Math.floor(((response.routes[0].legs[0].duration.value) / 60));
-      let duraFloat = Math.floor(((response.routes[0].legs[0].duration.value) % 60));
-      // console.log(duraInt + '.' + duraFloat + ' นาที');
-      // document.getElementById('duration').innerHTML = +duraInt + '.' + duraFloat + " นาที";
+          var distance = response.routes[0].legs[0].distance.value;
+          let dist = distance;
+          console.log(dist + ' เมตร');
 
-      // Display the distance
-      // document.getElementById('distance').innerHTML = +response.routes[0].legs[0].distance.value + " เมตร";
-
-      if (status === 'OK') {
-        directionsDisplay.setDirections(response);
+          var duration = response.routes[0].legs[0].duration.value;
+          let time = duration;
+          console.log(time + ' วินาที');
+          
+          directionsDisplay.setDirections(response);
+        }
+        else {
+          window.alert('Directions request failed due to ' + status);
+        }
       }
-      // else {
-      //   window.alert('Directions request failed due to ' + status);
-      // }
-    });
+    );
 
-    // // Distance between 2 direction
-    let distance = (google.maps.geometry.spherical.computeDistanceBetween(this.MyLocation, this.Destination) / 1000).toFixed(2);
-    // console.log('Distance :', distance, ' Kilometer');
-    
   }
-
 
 
   // Alert Accept
@@ -163,14 +166,14 @@ export class MapDirectionPage implements AfterViewInit {
           text: 'ตกลง',
           role: 'confirm',
           handler: () => {
-            let url: string = "http://127.0.0.1:8000/api/acceptRequest";
+            let url: string = "http://127.0.0.1:8000/api/takeOrder";
             let dataJson = new FormData();
-            dataJson.append('tid', this.tid); // where tid to wash
-            // dataJson.append('status', '1'); // update status = 1
+            dataJson.append('tid', this.tid); // insert tid to wash
+            // dataJson.append('status', '2'); // update status = 2
             let data: Observable<any> = this.http.post(url, dataJson)
             data.subscribe(res => {
               if (res != null) {
-                console.log('Change status = 1');
+                console.log('Change status = 2');
                 this.router.navigateByUrl('home');
               }
             });
@@ -181,7 +184,7 @@ export class MapDirectionPage implements AfterViewInit {
     await alert.present();
   }
 
-  // Cancel
+  // Cancel modal
   async cancelCall() {
     const modal = await this.modalController.create({
       component: WashCancelPage,

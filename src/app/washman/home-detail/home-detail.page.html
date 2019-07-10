@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="orders"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Home Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-content>Order : {{tid}}</ion-card-content>
+    <ion-card-content>ชื่อ : {{userid}}</ion-card-content>
+    <ion-card-content>เบอร์โทร : {{tel}}</ion-card-content>
+    <ion-card-content>ที่อยู่ : {{address}}</ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-row>
+      <ion-button style="width: 30%;">ย้อนกลับ</ion-button>
+      <ion-button style="width: 30%;" (click)="alertOrder()">ยืนยัน</ion-button>
+    </ion-row>
+  </ion-card>
+
+</ion-content>
