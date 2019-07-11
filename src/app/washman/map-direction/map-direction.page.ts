@@ -1,13 +1,16 @@
 import { WashCancelPage } from './../wash-cancel/wash-cancel.page';
 import { Component, AfterViewInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 declare var google;
+declare let window: any;
+let time = window.time;
+
 
 @Component({
   selector: 'app-map-direction',
@@ -32,8 +35,6 @@ export class MapDirectionPage implements AfterViewInit {
   username: any;
   service: any;
   price: any;
-
-  time: any;
 
   constructor(private alertController: AlertController,
     private router: Router,
@@ -83,6 +84,7 @@ export class MapDirectionPage implements AfterViewInit {
     };
     const map = new google.maps.Map(document.getElementById('map'), options);
     directionsDisplay.setMap(map);
+    // this.calculateAndDisplayRoute();
   }
 
   // Fuction Route
@@ -131,16 +133,9 @@ export class MapDirectionPage implements AfterViewInit {
       travelMode: google.maps.TravelMode.DRIVING
     },
       function (response, status) {
+        time = Math.ceil((response.routes[0].legs[0].duration.value) / 60);
         if (status === 'OK') {
-
           var distance = response.routes[0].legs[0].distance.value;
-          let dist = distance;
-          console.log(dist + ' เมตร');
-
-          var duration = response.routes[0].legs[0].duration.value;
-          let time = duration;
-          console.log(time + ' วินาที');
-          
           directionsDisplay.setDirections(response);
         }
         else {
@@ -148,7 +143,15 @@ export class MapDirectionPage implements AfterViewInit {
         }
       }
     );
-
+    let url: string = "http://127.0.0.1:8000/api/updateTimeFirebase";
+    let dataJson = new FormData();
+    dataJson.append('time', time);
+    let data: Observable<any> = this.http.post(url, dataJson)
+    data.subscribe(res => {
+      if (res != null) {
+        console.log('Update time success');
+      }
+    });
   }
 
 

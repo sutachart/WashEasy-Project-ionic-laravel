@@ -32,6 +32,13 @@ export class HomePage implements AfterViewInit {
     public http: HttpClient,
     public modalController: ModalController) {
 
+    // this.route.queryParams.subscribe(params => {
+    //   if (this.router.getCurrentNavigation().extras.state) {
+    //     this.time = this.router.getCurrentNavigation().extras.state.status;
+    //   }
+    // });
+    // console.log(this.time)
+
   }
 
   // Show status on feed homepage where user_id

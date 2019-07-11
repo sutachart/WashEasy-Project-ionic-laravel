@@ -17,10 +17,10 @@ class ApiController extends Controller
 
     public function updateTimeFirebase(Request $request){
         $time = $request['time'];
-
+        $timeInt = (int)$time;
         $firebase = new \Geckob\Firebase\Firebase('../apiFirebase.json');
         $temp = [];
-        $temp = $firebase->set('/setData', $time);
+        $temp = $firebase->set('/setData', $timeInt);
 
     }
 
