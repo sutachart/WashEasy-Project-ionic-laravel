@@ -122,10 +122,6 @@ export class MapDirectionPage implements AfterViewInit {
     }
     this.Destination = new google.maps.LatLng(pos_des);
 
-    // let distance = (google.maps.geometry.spherical.computeDistanceBetween(this.MyLocation, this.Destination) / 1000).toFixed(2);
-    // console.log(distance);
-
-
     // Route direction
     directionsService.route({
       origin: this.MyLocation,
@@ -133,9 +129,9 @@ export class MapDirectionPage implements AfterViewInit {
       travelMode: google.maps.TravelMode.DRIVING
     },
       function (response, status) {
-        time = Math.ceil((response.routes[0].legs[0].duration.value) / 60);
         if (status === 'OK') {
-          var distance = response.routes[0].legs[0].distance.value;
+          let distance = response.routes[0].legs[0].distance.value;
+          time = Math.ceil((response.routes[0].legs[0].duration.value) / 60); // Get time per minute 
           directionsDisplay.setDirections(response);
         }
         else {
@@ -143,15 +139,18 @@ export class MapDirectionPage implements AfterViewInit {
         }
       }
     );
-    let url: string = "http://127.0.0.1:8000/api/updateTimeFirebase";
-    let dataJson = new FormData();
-    dataJson.append('time', time);
-    let data: Observable<any> = this.http.post(url, dataJson)
-    data.subscribe(res => {
-      if (res != null) {
-        console.log('Update time success');
-      }
-    });
+    setTimeout(() => {
+      console.log(time);
+      let url: string = "http://127.0.0.1:8000/api/updateTimeFirebase";
+      let dataJson = new FormData();
+      dataJson.append('time', time);
+      let data: Observable<any> = this.http.post(url, dataJson)
+      data.subscribe(res => {
+        if (res != null) {
+          console.log('Update time success');
+        }
+      });
+    }, 500);
   }
 
 
