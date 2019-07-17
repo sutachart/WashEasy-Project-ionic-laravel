@@ -70,35 +70,4 @@ export class HomePage implements AfterViewInit {
     }
     this.router.navigate(['map-direction'], tidFromWashman);
   }
-
-  // async takeOrder(tid) {
-  //   const alert = await this.alertController.create({
-  //     header: 'ยืนยันการรับผ้า',
-  //     message: '',
-  //     buttons: [
-  //       {
-  //         text: 'ยกเลิก',
-  //         role: 'cancel',
-  //       },
-  //       {
-  //         text: 'ตกลง',
-  //         role: 'confirm',
-  //         handler: () => {
-  //           let url: string = "http://127.0.0.1:8000/api/takeOrder";
-  //           let dataJson = new FormData();
-  //           dataJson.append('tid', tid); // insert tid to wash
-  //           // dataJson.append('status', '2'); // update status = 2
-  //           let data: Observable<any> = this.http.post(url, dataJson)
-  //           data.subscribe(res => {
-  //             if (res != null) {
-  //               console.log('Change status = 2');
-  //               this.router.navigateByUrl('home');
-  //             }
-  //           });
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   await alert.present();
-  // }
 }

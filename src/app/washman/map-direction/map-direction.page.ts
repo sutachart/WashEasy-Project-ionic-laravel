@@ -84,7 +84,6 @@ export class MapDirectionPage implements AfterViewInit {
     };
     const map = new google.maps.Map(document.getElementById('map'), options);
     directionsDisplay.setMap(map);
-    // this.calculateAndDisplayRoute();
   }
 
   // Fuction Route
@@ -101,12 +100,21 @@ export class MapDirectionPage implements AfterViewInit {
     });
     directionsDisplay.setMap(map);
 
+    // Curret Position
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude
       this.longtitude = resp.coords.longitude
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+
+    // Watch Position realtime
+    // let watch = this.geolocation.watchPosition();
+    // watch.subscribe((data) => {
+    //   // console.log(data);
+    //   // this.latitude = data.coords.latitude;
+    //   // this.longtitude = data.coords.longitude;
+    // });
 
     var pos = {
       lat: this.latitude,
@@ -150,7 +158,7 @@ export class MapDirectionPage implements AfterViewInit {
           console.log('Update time success');
         }
       });
-    }, 500);
+    }, 750);
   }
 
 
