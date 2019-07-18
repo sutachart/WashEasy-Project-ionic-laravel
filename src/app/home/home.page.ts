@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,10 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements AfterViewInit {
+
+  shoppingItem: Observable<any>;
+  items: AngularFireList<any[]>;
+  public response: Observable<any[]>;
 
   dataReturned: any;
   // Params from callwash
@@ -25,20 +30,29 @@ export class HomePage implements AfterViewInit {
 
   time: any;
 
+  item = [];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     public navHttp: Http,
     public http: HttpClient,
-    public modalController: ModalController) {
+    public modalController: ModalController,
+    public afDatabase: AngularFireDatabase) {
 
-    // this.route.queryParams.subscribe(params => {
-    //   if (this.router.getCurrentNavigation().extras.state) {
-    //     this.time = this.router.getCurrentNavigation().extras.state.status;
-    //   }
-    // });
-    // console.log(this.time)
+  }
 
+  ngOnInit(): void {
+    // connect shopping in firebase
+    this.shoppingItem = this.afDatabase.object('setData').valueChanges();
+    this.shoppingItem.subscribe(data => {
+      this.response = data;
+    });
+  }
+
+  addItem() {
+    console.log(this.response);
+    return this.afDatabase.list('/shoppingItem/').push(this.item);
   }
 
   // Show status on feed homepage where user_id

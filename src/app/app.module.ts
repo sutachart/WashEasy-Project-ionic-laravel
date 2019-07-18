@@ -22,6 +22,19 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { IonicRatingModule } from 'ionic4-rating';
 
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyDl-aQ9SopSAdG-ehn1tj8ijAZjUplQXbo",
+  authDomain: "ionic-242807.firebaseapp.com",
+  databaseURL: "https://ionic-242807.firebaseio.com",
+  projectId: "ionic-242807",
+  storageBucket: "ionic-242807.appspot.com",
+  messagingSenderId: "864780708661",
+  appId: "1:864780708661:web:db8dc8947c3fdbd8"
+};
+
 
 @NgModule({
   declarations: [AppComponent, MoreLocationListComponent],
@@ -35,6 +48,8 @@ import { IonicRatingModule } from 'ionic4-rating';
     CancellationPageModule,
     WashCancelPageModule,
     IonicRatingModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot()
   ],
   providers: [
@@ -46,4 +61,4 @@ import { IonicRatingModule } from 'ionic4-rating';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

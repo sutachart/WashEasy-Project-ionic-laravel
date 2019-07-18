@@ -9,7 +9,7 @@ describe('HomePage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePage ],
+      declarations: [HomePage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();
@@ -22,6 +22,7 @@ describe('HomePage', () => {
   });
 
   it('should create', () => {
+    const service: HomePage = TestBed.get(HomePage);
     expect(component).toBeTruthy();
   });
 });
