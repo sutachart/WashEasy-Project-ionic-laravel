@@ -15,7 +15,6 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 export class HomePage implements AfterViewInit {
 
   shoppingItem: Observable<any>;
-  items: AngularFireList<any[]>;
   public response: Observable<any[]>;
 
   dataReturned: any;
@@ -28,9 +27,6 @@ export class HomePage implements AfterViewInit {
   comment: string;
   rate: any;
 
-  time: any;
-
-  item = [];
 
   constructor(
     private router: Router,
@@ -50,10 +46,11 @@ export class HomePage implements AfterViewInit {
     });
   }
 
-  addItem() {
-    console.log(this.response);
-    return this.afDatabase.list('/shoppingItem/').push(this.item);
-  }
+  // Test Put data to firebase
+  // addItem() {
+  //   console.log(this.response);
+  //   return this.afDatabase.list('/shoppingItem/').push(this.item);
+  // }
 
   // Show status on feed homepage where user_id
   ngAfterViewInit() {
@@ -65,16 +62,16 @@ export class HomePage implements AfterViewInit {
         this.status = res.status[0].status;
         this.tid = res.status[0].tid;
         // Check status = 1 washman receive
-        if (this.status == 1) {
-          let url: string = "http://127.0.0.1:8000/api/getTimeFirebase"; // get time from firebase
-          let dataJson = new FormData();
-          let data: Observable<any> = this.http.post(url, dataJson)
-          data.subscribe(res => {
-            if (res != null) {
-              this.time = res.time;
-            }
-          });
-        }
+        //   if (this.status == 1) {
+        //     let url: string = "http://127.0.0.1:8000/api/getTimeFirebase"; // get time from firebase
+        //     let dataJson = new FormData();
+        //     let data: Observable<any> = this.http.post(url, dataJson)
+        //     data.subscribe(res => {
+        //       if (res != null) {
+
+        //       }
+        //     });
+        //   }
       }
     });
   }

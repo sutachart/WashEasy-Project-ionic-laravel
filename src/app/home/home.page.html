@@ -10,11 +10,6 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-label class="ion-align-items-center" class="ion-align-self-center" class="ion-text-center" *ngIf="status==0">HELLO WORLD{{status}}
-    </ion-label> -->
-  <!-- <ion-card padding *ngIf="status==null||status=='C'" style="border: solid rgb(92, 209, 255) 0.5px;">
-    <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">เรียกบริการรับผ้า</ion-card-header>
-  </ion-card> -->
   <ion-card *ngIf="status==0" style="border: solid royalblue 0.5px;">
     <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">รอการตอบรับ</ion-card-header>
     <ion-card-content class="ion-text-center">รอการตอบรับจาก Wash-man</ion-card-content>
@@ -22,12 +17,6 @@
     <ion-progress-bar type="indeterminate" reversed="true"></ion-progress-bar>
     <ion-button vertical="top" horizontal="end" style="float: right;--border-radius: 70px;" fill="outline"
       color="medium" (click)="cancelCall()">ยกเลิก</ion-button>
-    <!-- fab placed to the top end 
-    {{response}}slot="fixed">
-      <ion-fab-button (click)="cancelCall()">
-        <ion-icon name="trash"></ion-icon>
-      </ion-fab-button>
-    <!-- </ion-fab>  -->
   </ion-card>
   <ion-card *ngIf="status==1" style="border: solid royalblue 0.5px;">
     <ion-card-header class="ion-text-center" style="color: black; font-size: 16px;">Wash-man กำลังไปรับผ้า
@@ -59,25 +48,5 @@
       </ion-button>
     </ion-card-content>
   </ion-card>
-
-  <ion-row>
-    <ion-col col-9>
-      <ion-item>
-        <ion-input type="text" [(ngModel)]="item" placeholder="Input item"></ion-input> 
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-button (click)="addItem(item)">Add</ion-button>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-list *ngFor="let data of items">
-      <ion-item>Test</ion-item>
-      <ion-item>{{data?.$key}}</ion-item>
-    </ion-list>
-  </ion-row>
-
+  
 </ion-content>
